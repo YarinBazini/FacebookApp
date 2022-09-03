@@ -17,23 +17,23 @@ namespace FacebookAppGUI
 
         public void FetchUserGroups()
         {
-            m_ListBoxGroups.Items.Clear();
-            m_LabelError.Visible = false;
+            m_ListBoxGroups.Invoke(new Action(() => m_ListBoxGroups.Items.Clear()));
+            m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
             try
             {
                 foreach (Group group in r_AppManager.UserGroups)
                 {
-                    m_ListBoxGroups.Items.Add(group);
+                    m_ListBoxGroups.Invoke(new Action(() => m_ListBoxGroups.Items.Add(group)));
                 }
 
                 if (m_ListBoxGroups.Items.Count == 0)
                 {
-                    m_ListBoxGroups.Items.Add("You doesn't have groups to show");
+                    m_ListBoxGroups.Invoke(new Action(() => m_ListBoxGroups.Items.Add("You doesn't have groups to show")));
                 }
             }
             catch (Exception exception)
             {
-                m_LabelError.Visible = true;
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
         }
 
