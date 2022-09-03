@@ -5,23 +5,23 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
-    public partial class UserGroupsController : UserControl
+    public partial class UserGroupsController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get; }
 
-        public UserGroupsController(AppManager i_AppManager)
+        public UserGroupsController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
         }
 
-        public void FetchUserGroups()
+        public void FetchData()
         {
             m_ListBoxGroups.Invoke(new Action(() => m_ListBoxGroups.Items.Clear()));
             m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
             try
             {
-                foreach (Group group in r_AppManager.UserGroups)
+                foreach (Group group in Manager.UserGroups)
                 {
                     m_ListBoxGroups.Invoke(new Action(() => m_ListBoxGroups.Items.Add(group)));
                 }

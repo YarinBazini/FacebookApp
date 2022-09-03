@@ -5,23 +5,23 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
-    public partial class UserLikedPagesController : UserControl
+    public partial class UserLikedPagesController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get; }
 
-        public UserLikedPagesController(AppManager i_AppManager)
+        public UserLikedPagesController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
         }
-
-        public void FetchUserLikePages()
+         
+        public void FetchData()
         {
             try
             {
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
                 m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Clear()));
-                foreach (Page page in r_AppManager.UserLikedPages)
+                foreach (Page page in Manager.UserLikedPages)
                 {
                     m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Add(page)));
                 }

@@ -4,25 +4,25 @@ using FacebookAppLogic;
 
 namespace FacebookAppGUI
 {
-    public partial class UserAboutController : UserControl
+    public partial class UserAboutController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get; }
 
-        public UserAboutController(AppManager i_AppManager)
+        public UserAboutController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
         }
 
-        public void FetchUserAboutData()
+        public void FetchData()
         {
-            m_LabelFirstName.Invoke(new Action(() => m_LabelFirstName.Text = r_AppManager.LoggedInUser.FirstName));
-            m_LabelFirstName.Invoke(new Action(() => m_LabelLastName.Text = r_AppManager.LoggedInUser.LastName));
-            m_LabelFirstName.Invoke(new Action(() => m_LabelGender.Text = r_AppManager.LoggedInUser.Gender.ToString()));
-            m_LabelFirstName.Invoke(new Action(() => m_LabelBirthday.Text = r_AppManager.LoggedInUser.Birthday.ToString()));
-            m_LabelFirstName.Invoke(new Action(() => m_LabelEmail.Text = r_AppManager.LoggedInUser.Email.ToString()));
-            m_LabelFirstName.Invoke(new Action(() => m_LabelRelationshipStatus.Text = r_AppManager.LoggedInUser.RelationshipStatus.ToString()));
-            m_LabelFirstName.Invoke(new Action(() => m_LabelFacebookId.Text = r_AppManager.LoggedInUser.Id));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelFirstName.Text = Manager.LoggedInUser.FirstName));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelLastName.Text = Manager.LoggedInUser.LastName));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelGender.Text = Manager.LoggedInUser.Gender.ToString()));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelBirthday.Text = Manager.LoggedInUser.Birthday.ToString()));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelEmail.Text = Manager.LoggedInUser.Email.ToString()));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelRelationshipStatus.Text = Manager.LoggedInUser.RelationshipStatus.ToString()));
+            m_LabelFirstName.Invoke(new Action(() => m_LabelFacebookId.Text = Manager.LoggedInUser.Id));
         }
     }
 }
