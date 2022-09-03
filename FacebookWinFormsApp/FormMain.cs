@@ -21,7 +21,7 @@ namespace FacebookAppGUI
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 100;
-            r_AppManager = new AppManager();
+            r_AppManager = AppManager.Instance;
             r_UserPostController = new UserPostsController(r_AppManager);
             r_UserAboutController = new UserAboutController(r_AppManager);
             r_UserPhotosController = new UserPhotosController(r_AppManager);

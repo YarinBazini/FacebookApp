@@ -46,15 +46,16 @@ namespace FacebookAppGUI
 
         private void initAllComponents()
         {
-            new Thread(initYearsComboBox);        
+            new Thread(initYearsComboBox).Start();        
             new Thread(initBarChart).Start();
         }
 
         private void m_ComboBoxYears_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox yearsComboBox = sender as ComboBox;
+            int year = (int)yearsComboBox.Items[yearsComboBox.SelectedIndex];
 
-            new Thread(() => fetchSelectedYeadData((int)yearsComboBox.Items[yearsComboBox.SelectedIndex])).Start();
+            new Thread(() => fetchSelectedYeadData(year)).Start();
         }
 
         private void fetchSelectedYeadData(int i_Year)

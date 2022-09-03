@@ -7,6 +7,8 @@ namespace FacebookAppLogic
 {
     public class AppManager
     {
+        private static AppManager s_AppManagerInstance = null;
+        private static object s_LockObj = new object();
         private const string k_AccessTokenFilePath = "AccessToken.txt";
         private User m_LoggedInUser;
         private LoginResult m_LoginResult;
@@ -15,8 +17,28 @@ namespace FacebookAppLogic
         private StatisticsManager m_StatisticsManager;
         private const string AppID = "599927405011335";
 
-        public AppManager()
+        private AppManager()
         {}
+
+        public static AppManager Instance 
+        { 
+            get
+            {
+                if(s_AppManagerInstance == null)
+                {
+                    lock(s_LockObj)
+                    {
+                        if(s_AppManagerInstance == null)
+                        {
+                            s_AppManagerInstance = new AppManager();
+                        }
+                    }
+                }
+
+                return s_AppManagerInstance;
+            }
+
+         }
 
         public void Login()
         {
