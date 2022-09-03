@@ -3,44 +3,45 @@ using System.Windows.Forms;
 using FacebookWrapper;
 using FacebookAppLogic;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace FacebookAppGUI
 {
     public partial class FormMain : Form
     {
-        private readonly AppManager r_AppManager;
-        private readonly UserPostsController r_UserPostController;
-        private readonly UserAboutController r_UserAboutController;
-        private readonly UserPhotosController r_UserPhotosController;
-        private readonly UserGroupsController r_UserGroupsController;
-        private readonly UserLikedPagesController r_UserLikedPagesController;
-        private readonly PostsGameController r_PostsGameController;
-        private readonly UserStatisticsController r_UserStatisticsController;
-         
+        public AppManager Manager { get; }
+        public Dictionary<TabsFactory.TabType, ITab> Tabs { get; }
+
         public FormMain()
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 100;
-            r_AppManager = AppManager.Instance;
-            r_UserPostController = new UserPostsController(r_AppManager);
-            r_UserAboutController = new UserAboutController(r_AppManager);
-            r_UserPhotosController = new UserPhotosController(r_AppManager);
-            r_UserGroupsController = new UserGroupsController(r_AppManager);
-            r_UserLikedPagesController = new UserLikedPagesController(r_AppManager);
-            r_PostsGameController = new PostsGameController(r_AppManager);
-            r_UserStatisticsController = new UserStatisticsController(r_AppManager);
+            Manager = AppManager.Instance;
+            Tabs = new Dictionary<TabsFactory.TabType, ITab>();
+            initTabsDictionary();
             conectControlersToUITabs();
+        }
+
+        private void initTabsDictionary()
+        {
+            Tabs.Add(TabsFactory.TabType.PostsTab, TabsFactory.Create(TabsFactory.TabType.PostsTab));
+            Tabs.Add(TabsFactory.TabType.AboutTab, TabsFactory.Create(TabsFactory.TabType.AboutTab));
+            Tabs.Add(TabsFactory.TabType.PhotosTab, TabsFactory.Create(TabsFactory.TabType.PhotosTab));
+            Tabs.Add(TabsFactory.TabType.GroupsTab, TabsFactory.Create(TabsFactory.TabType.GroupsTab));
+            Tabs.Add(TabsFactory.TabType.LikesPagesTab, TabsFactory.Create(TabsFactory.TabType.LikesPagesTab));
+            Tabs.Add(TabsFactory.TabType.PostsGameTab, TabsFactory.Create(TabsFactory.TabType.PostsGameTab));
+            Tabs.Add(TabsFactory.TabType.UserStatisticsTab, TabsFactory.Create(TabsFactory.TabType.UserStatisticsTab));
         }
 
         private void conectControlersToUITabs()
         {
-            this.m_TabPosts.Controls.Add(r_UserPostController);
-            this.m_TabAbout.Controls.Add(r_UserAboutController);
-            this.m_TabPhotos.Controls.Add(r_UserPhotosController);
-            this.m_TabGroups.Controls.Add(r_UserGroupsController);
-            this.m_TabLikedPages.Controls.Add(r_UserLikedPagesController);
-            this.m_TabPagePostsGame.Controls.Add(r_PostsGameController);
-            this.m_TabPageStatistics.Controls.Add(r_UserStatisticsController);
+            this.m_TabPosts.Controls.Add(Tabs[TabsFactory.TabType.PostsTab] as UserControl);
+            this.m_TabAbout.Controls.Add(Tabs[TabsFactory.TabType.AboutTab] as UserControl);
+            this.m_TabPhotos.Controls.Add(Tabs[TabsFactory.TabType.PhotosTab] as UserControl);
+            this.m_TabGroups.Controls.Add(Tabs[TabsFactory.TabType.GroupsTab] as UserControl);
+            this.m_TabLikedPages.Controls.Add(Tabs[TabsFactory.TabType.LikesPagesTab] as UserControl);
+            this.m_TabPagePostsGame.Controls.Add(Tabs[TabsFactory.TabType.PostsGameTab] as UserControl);
+            this.m_TabPageStatistics.Controls.Add(Tabs[TabsFactory.TabType.UserStatisticsTab] as UserControl);
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -49,7 +50,7 @@ namespace FacebookAppGUI
             {
                 m_LabelLoading.Visible = true;
                 m_LabelErrorBeforLogin.Visible = false;
-                r_AppManager.Login();
+                Manager.Login();
                 setUserFacebookPage();
                 new Thread(fetchUserData).Start();
                 m_LabelLoading.Visible = false;
@@ -63,8 +64,8 @@ namespace FacebookAppGUI
 
         private void setUserFacebookPage()
         {
-            m_PictureBoxUserProfie.LoadAsync(r_AppManager.GetUserProfilePicture());
-            m_LabelUserName.Text = r_AppManager.GetUserName();
+            m_PictureBoxUserProfie.LoadAsync(Manager.GetUserProfilePicture());
+            m_LabelUserName.Text = Manager.GetUserName();
             checkIfCoverPhotoExistAndShow();
             showRelevantComponents();
         }
@@ -96,52 +97,36 @@ namespace FacebookAppGUI
         {
             try
             {
-                new Thread(fetchUserPosts).Start();
-                new Thread(fetchUserAboutData).Start();
-                new Thread(fetchUserPhotos).Start();
-                new Thread(fetchUserGroups).Start();
-                new Thread(fetchUserLikePages).Start();
-                fetchUserPostsGame();
+                List<Thread> fetchThreads = new List<Thread>();
+                Thread current;
+
+                foreach (KeyValuePair< TabsFactory.TabType, ITab> entry in Tabs)
+                {
+                    if(entry.Key != TabsFactory.TabType.UserStatisticsTab && entry.Key != TabsFactory.TabType.PostsGameTab)
+                    {
+                        current =  new Thread(entry.Value.FetchData);
+                        fetchThreads.Add(current);
+                        current.Start();
+                    }
+                }
+
+                foreach(Thread thread in fetchThreads)
+                {
+                    thread.Join();
+                }
+
+                Tabs[TabsFactory.TabType.UserStatisticsTab].FetchData();
+                Tabs[TabsFactory.TabType.PostsGameTab].FetchData();
             }
             catch (Exception exception)
             { }
-        }
-
-        private void fetchUserPostsGame()
-        {
-            r_PostsGameController.FetchGameData();
-        }
-
-        private void fetchUserLikePages()
-        {
-            r_UserLikedPagesController.FetchUserLikePages();
-        }
-
-        private void fetchUserGroups()
-        {
-            r_UserGroupsController.FetchUserGroups();
-        }
-
-        private void fetchUserPhotos()
-        {
-            r_UserPhotosController.FetchUserPhotos();
-        }
-
-        private void fetchUserAboutData()
-        {
-            r_UserAboutController.FetchUserAboutData();
-        }
-
-        private void fetchUserPosts()
-        {
-             r_UserPostController.FetchUserPosts();
         }
 
         private void checkIfCoverPhotoExistAndShow()
         {
             string coverPictureUrl;
 
-            if (r_AppManager.CheckIfCoverPhotoExistAndReturnUrl(out coverPictureUrl))
+            if (Manager.CheckIfCoverPhotoExistAndReturnUrl(out coverPictureUrl))
             {
                 m_LabelCoverPhotoError.Visible = false;
                 m_PictureBoxUserCover.LoadAsync(coverPictureUrl);
@@ -154,7 +139,7 @@ namespace FacebookAppGUI
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            r_AppManager.Logout();
+            Manager.Logout();
             hideRelevantComponents();
         }
     }

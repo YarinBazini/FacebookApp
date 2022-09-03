@@ -7,31 +7,49 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
-    public partial class UserStatisticsController : UserControl
+    public partial class UserStatisticsController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get; }
         private YearSummery m_SelectedYearSummery;
         private Post m_SelectedPost;
 
-        public UserStatisticsController(AppManager i_AppManager)
+        public UserStatisticsController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
+        }
+
+        public void FetchData()
+        {
+            new Thread(initYearsComboBox).Start();
+            new Thread(initBarChart).Start();
         }
 
         private void initBarChart()
         {
-            foreach (KeyValuePair<int, int> entry in r_AppManager.Statistics.GetYearToPostCountDict())
+            try
             {
-                m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series["Posts Amaunt"].Points.AddXY(entry.Key, entry.Value)));
+                foreach (KeyValuePair<int, int> entry in Manager.Statistics.GetYearToPostCountDict())
+                {
+                    m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series["Posts Amaunt"].Points.AddXY(entry.Key, entry.Value)));
+                }
             }
+            catch(Exception exception)
+            { }
         }
 
         private void initYearsComboBox()
         {
-            foreach (int year in r_AppManager.Statistics.GetAllYearsWithPosts())
+            try
             {
-                m_ComboBoxYears.Invoke(new Action(() => m_ComboBoxYears.Items.Add(year)));
+                foreach (int year in Manager.Statistics.GetAllYearsWithPosts())
+                {
+                    m_ComboBoxYears.Invoke(new Action(() => m_ComboBoxYears.Items.Add(year)));
+                }
+            }
+            catch(Exception exception)
+            {
+
             }
         }
 
@@ -41,13 +59,6 @@ namespace FacebookAppGUI
 
             showButton.Visible = false;
             m_PanelStatistics.Visible = true;
-            new Thread(initAllComponents).Start();
-        }
-
-        private void initAllComponents()
-        {
-            new Thread(initYearsComboBox).Start();        
-            new Thread(initBarChart).Start();
         }
 
         private void m_ComboBoxYears_SelectedIndexChanged(object sender, EventArgs e)
@@ -61,7 +72,7 @@ namespace FacebookAppGUI
         private void fetchSelectedYeadData(int i_Year)
         {
             m_LabelWait.Invoke(new Action(() => m_LabelWait.Visible = true));
-            m_SelectedYearSummery = r_AppManager.Statistics.GetSummeryByYear(i_Year);
+            m_SelectedYearSummery = Manager.Statistics.GetSummeryByYear(i_Year);
             m_LabelWait.Invoke(new Action(() => m_LabelWait.Visible = false));
             this.Invoke(new Action(() => updateYearPanel()));
             this.Invoke(new Action(() => resetUserSelectedData()));

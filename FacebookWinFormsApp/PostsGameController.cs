@@ -5,29 +5,29 @@ using FacebookAppLogic;
 
 namespace FacebookAppGUI
 {
-    public partial class PostsGameController : UserControl
+    public partial class PostsGameController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get; }
         private PostsGame m_PostsGame;
         private PostsGameQuestion m_CurrentQuestion;
 
-        public PostsGameController(AppManager i_AppManager)
+        public PostsGameController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
         }
 
-        public void FetchGameData()
+        public void FetchData()
         {
-            m_PostsGame = r_AppManager.PostsGame();
+            m_PostsGame = Manager.PostsGame();
             if (!m_PostsGame.UserCanPlay)
             {
-                m_LabelErrorMessage.Visible = true;
-                m_ButtonNewGame.Enabled = false;
+                m_LabelErrorMessage.Invoke(new Action(() => m_LabelErrorMessage.Visible = true));
+                m_ButtonNewGame.Invoke(new Action(() => m_ButtonNewGame.Enabled = false));
             }
             else
-            {
-                setAllControls();
+            { 
+                this.Invoke(new Action(()=> setAllControls()));
             }
         }
 

@@ -5,23 +5,23 @@ using FacebookAppLogic;
 
 namespace FacebookAppGUI
 {
-    public partial class UserPostsController : UserControl
+    public partial class UserPostsController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get; }
 
-        public UserPostsController(AppManager i_AppManager)
+        public UserPostsController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
         }
 
-        public void FetchUserPosts()
+        public void FetchData()
         {
             try
             {
                 m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Clear()));
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
-                foreach (Post post in r_AppManager.LoggedInUser.Posts)
+                foreach (Post post in Manager.LoggedInUser.Posts)
                 {
                     if (post.Message != null)
                     {
@@ -52,7 +52,7 @@ namespace FacebookAppGUI
         {
             try
             {
-                Post selectedUsetPost = r_AppManager.LoggedInUser.Posts[m_ListBoxPosts.SelectedIndex];
+                Post selectedUsetPost = Manager.LoggedInUser.Posts[m_ListBoxPosts.SelectedIndex];
 
                 m_ListBoxPostComments.Items.Clear();
                 m_LabelError.Visible = false;

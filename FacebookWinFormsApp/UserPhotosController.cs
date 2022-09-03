@@ -6,26 +6,26 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
-    public partial class UserPhotosController : UserControl
+    public partial class UserPhotosController : UserControl, ITab
     {
-        private readonly AppManager r_AppManager;
+        public AppManager Manager { get;}
         private readonly List<string> r_UserPhotoListOnSelectedPhotoAlbom;
         private int m_CurrentPhotoShowOnPhotosTab;
 
-        public UserPhotosController(AppManager i_AppManager)
+        public UserPhotosController()
         {
             InitializeComponent();
-            r_AppManager = i_AppManager;
+            Manager = AppManager.Instance;
             r_UserPhotoListOnSelectedPhotoAlbom = new List<string>();
         }
 
-        public void FetchUserPhotos()
+        public void FetchData()
         {
             try
             {
                 m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Clear()));
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
-                foreach (Album album in r_AppManager.UserPhotoAlbums)
+                foreach (Album album in Manager.UserPhotoAlbums)
                 {
                     m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Add(album)));
                 }
