@@ -19,21 +19,21 @@ namespace FacebookAppGUI
         {
             try
             {
-                m_ListBoxPosts.Items.Clear();
-                m_LabelError.Visible = false;
+                m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Clear()));
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
                 foreach (Post post in r_AppManager.LoggedInUser.Posts)
                 {
                     if (post.Message != null)
                     {
-                        m_ListBoxPosts.Items.Add(post.Message);
+                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add(post.Message)));
                     }
                     else if (post.Caption != null)
                     {
-                        m_ListBoxPosts.Items.Add(post.Caption);
+                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add(post.Caption)));
                     }
                     else
                     {
-                        m_ListBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
+                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add((string.Format("[{0}]", post.Type)))));
                     }
                 }
 
@@ -44,7 +44,7 @@ namespace FacebookAppGUI
             }
             catch (Exception exception)
             {
-                m_LabelError.Visible = true;
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
         }
 

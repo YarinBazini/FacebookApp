@@ -23,21 +23,21 @@ namespace FacebookAppGUI
         {
             try
             {
-                m_ListBoxPhotos.Items.Clear();
-                m_LabelError.Visible = false;
+                m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Clear()));
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
                 foreach (Album album in r_AppManager.UserPhotoAlbums)
                 {
-                    m_ListBoxPhotos.Items.Add(album);
+                    m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Add(album)));
                 }
 
                 if (m_ListBoxPhotos.Items.Count == 0)
                 {
-                    m_ListBoxPhotos.Items.Add("You doesn't have photo alboms to show");
+                    m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Add("You doesn't have photo alboms to show")));
                 }
             }
             catch (Exception exception)
             {
-                m_LabelError.Visible = true;
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
             
         }

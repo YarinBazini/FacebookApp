@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using FacebookWrapper;
 using FacebookAppLogic;
+using System.Threading;
 
 namespace FacebookAppGUI
 {
@@ -50,7 +51,7 @@ namespace FacebookAppGUI
                 m_LabelErrorBeforLogin.Visible = false;
                 r_AppManager.Login();
                 setUserFacebookPage();
-                fetchUserData();
+                new Thread(fetchUserData).Start();
                 m_LabelLoading.Visible = false;
             }
             catch (Exception exception)
@@ -95,11 +96,11 @@ namespace FacebookAppGUI
         {
             try
             {
-                fetchUserPosts();
-                fetchUserAboutData();
-                fetchUserPhotos();
-                fetchUserGroups();
-                fetchUserLikePages();
+                new Thread(fetchUserPosts).Start();
+                new Thread(fetchUserAboutData).Start();
+                new Thread(fetchUserPhotos).Start();
+                new Thread(fetchUserGroups).Start();
+                new Thread(fetchUserLikePages).Start();
                 fetchUserPostsGame();
             }
             catch (Exception exception)

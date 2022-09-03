@@ -19,21 +19,21 @@ namespace FacebookAppGUI
         {
             try
             {
-                m_LabelError.Visible = false;
-                m_ListBoxLikePages.Items.Clear();
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
+                m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Clear()));
                 foreach (Page page in r_AppManager.UserLikedPages)
                 {
-                    m_ListBoxLikePages.Items.Add(page);
+                    m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Add(page)));
                 }
 
                 if (m_ListBoxLikePages.Items.Count == 0)
                 {
-                    m_ListBoxLikePages.Items.Add("You doesn't have like pages to show");
+                    m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Add("You doesn't have like pages to show")));
                 }
             }
             catch (Exception exception)
             {
-                m_LabelError.Visible = true;
+                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
         }
 
