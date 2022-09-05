@@ -7,12 +7,12 @@ namespace FacebookAppGUI
 {
     public partial class UserPostsController : UserControl, ITab
     {
-        public AppManager Manager { get; }
+        public PostsFacade Facade { get; }
 
         public UserPostsController()
         {
             InitializeComponent();
-            Manager = AppManager.Instance;
+            Facade = new PostsFacade();
         }
 
         public void FetchData()
@@ -21,7 +21,7 @@ namespace FacebookAppGUI
             {
                 m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Clear()));
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
-                foreach (Post post in Manager.LoggedInUser.Posts)
+                foreach (Post post in Facade.Posts)
                 {
                     if (post.Message != null)
                     {
@@ -44,7 +44,7 @@ namespace FacebookAppGUI
             }
             catch (Exception exception)
             {
-                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
+                //m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
         }
 
@@ -52,7 +52,7 @@ namespace FacebookAppGUI
         {
             try
             {
-                Post selectedUsetPost = Manager.LoggedInUser.Posts[m_ListBoxPosts.SelectedIndex];
+                Post selectedUsetPost = Facade.Posts[m_ListBoxPosts.SelectedIndex];
 
                 m_ListBoxPostComments.Items.Clear();
                 m_LabelError.Visible = false;

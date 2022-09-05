@@ -7,12 +7,12 @@ namespace FacebookAppGUI
 {
     public partial class UserLikedPagesController : UserControl, ITab
     {
-        public AppManager Manager { get; }
+        public LikedPagesPageFacade Facade { get; }
 
         public UserLikedPagesController()
         {
             InitializeComponent();
-            Manager = AppManager.Instance;
+            Facade = new LikedPagesPageFacade();
         }
          
         public void FetchData()
@@ -21,7 +21,7 @@ namespace FacebookAppGUI
             {
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
                 m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Clear()));
-                foreach (Page page in Manager.UserLikedPages)
+                foreach (Page page in Facade.LikedPages)
                 {
                     m_ListBoxLikePages.Invoke(new Action(() => m_ListBoxLikePages.Items.Add(page)));
                 }
@@ -33,7 +33,7 @@ namespace FacebookAppGUI
             }
             catch (Exception exception)
             {
-                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
+               // m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
         }
 

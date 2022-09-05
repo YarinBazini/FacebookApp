@@ -7,12 +7,12 @@ namespace FacebookAppGUI
 {
     public partial class UserGroupsController : UserControl, ITab
     {
-        public AppManager Manager { get; }
+        public GroupsPageFacade Facade { get; }
 
         public UserGroupsController()
         {
             InitializeComponent();
-            Manager = AppManager.Instance;
+            Facade = new GroupsPageFacade();
         }
 
         public void FetchData()
@@ -21,7 +21,7 @@ namespace FacebookAppGUI
             m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
             try
             {
-                foreach (Group group in Manager.UserGroups)
+                foreach (Group group in Facade.Groups)
                 {
                     m_ListBoxGroups.Invoke(new Action(() => m_ListBoxGroups.Items.Add(group)));
                 }
@@ -33,7 +33,7 @@ namespace FacebookAppGUI
             }
             catch (Exception exception)
             {
-                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
+               // m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
         }
 

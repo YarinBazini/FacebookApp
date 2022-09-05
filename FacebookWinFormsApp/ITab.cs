@@ -9,7 +9,6 @@ namespace FacebookAppGUI
 {
     public interface ITab
     {
-        AppManager Manager { get; }
         void FetchData();
     }
 }

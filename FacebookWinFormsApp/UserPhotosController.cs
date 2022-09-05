@@ -8,14 +8,14 @@ namespace FacebookAppGUI
 {
     public partial class UserPhotosController : UserControl, ITab
     {
-        public AppManager Manager { get;}
+        public PhotosPageFacade Facade { get; }
         private readonly List<string> r_UserPhotoListOnSelectedPhotoAlbom;
         private int m_CurrentPhotoShowOnPhotosTab;
 
         public UserPhotosController()
         {
             InitializeComponent();
-            Manager = AppManager.Instance;
+            Facade = new PhotosPageFacade();
             r_UserPhotoListOnSelectedPhotoAlbom = new List<string>();
         }
 
@@ -25,7 +25,7 @@ namespace FacebookAppGUI
             {
                 m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Clear()));
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
-                foreach (Album album in Manager.UserPhotoAlbums)
+                foreach (Album album in Facade.Albums)
                 {
                     m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Add(album)));
                 }
@@ -37,7 +37,7 @@ namespace FacebookAppGUI
             }
             catch (Exception exception)
             {
-                m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
+                //m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
             }
             
         }
