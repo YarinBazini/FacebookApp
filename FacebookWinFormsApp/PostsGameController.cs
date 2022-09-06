@@ -7,20 +7,18 @@ namespace FacebookAppGUI
 {
     public partial class PostsGameController : UserControl, ITab
     {
-        public AppManager Manager { get; }
-        private PostsGame m_PostsGame;
+        public PostGameFacade Facade { get; }
         private PostsGameQuestion m_CurrentQuestion;
 
         public PostsGameController()
         {
             InitializeComponent();
-            Manager = AppManager.Instance;
+            Facade = new PostGameFacade();
         }
 
         public void FetchData()
         {
-            m_PostsGame = Manager.PostsGame();
-            if (!m_PostsGame.UserCanPlay)
+            if (!Facade.UserCanPlay)
             {
                 m_LabelErrorMessage.Invoke(new Action(() => m_LabelErrorMessage.Visible = true));
                 m_ButtonNewGame.Invoke(new Action(() => m_ButtonNewGame.Enabled = false));
@@ -36,8 +34,8 @@ namespace FacebookAppGUI
             try
             {
                 m_LabelError.Visible = false;
-                m_PostsGame.StartNewGame();
-                m_CurrentQuestion = m_PostsGame.GetQuestion();
+                Facade.StartNewGame();
+                m_CurrentQuestion = Facade.GetQuestion();
                 m_PanelPostsGame.Visible = true;
                 setAllControls();
             }
@@ -53,9 +51,9 @@ namespace FacebookAppGUI
 
             m_LabelLastResult.Visible = false;
             m_ButtonNextQuestion.Visible = false;
-            m_LabelScore.Text = "Score: " + m_PostsGame.CurrentScore.ToString();
-            m_LabelBestScore.Text = "Best Score: " + m_PostsGame.BestScore.ToString();
-            m_LabelNumberOfQuestion.Text = m_PostsGame.QuestionCounter.ToString() + "/" + m_PostsGame.QuestionsPerGame.ToString();
+            m_LabelScore.Text = "Score: " + Facade.CurrentScore.ToString();
+            m_LabelBestScore.Text = "Best Score: " + Facade.BestScore.ToString();
+            m_LabelNumberOfQuestion.Text = Facade.QuestionCounter.ToString() + "/" + Facade.QuestionsPerGame.ToString();
             if (m_CurrentQuestion != null)
             {
                 m_LabelPost.Text = m_CurrentQuestion.PostQuestionContent;
@@ -73,7 +71,7 @@ namespace FacebookAppGUI
 
             if (m_CurrentQuestion.CheckAnswer(clickedButton.Text))
             {
-                m_PostsGame.IncreaseScore();
+                Facade.IncreaseScore();
                 m_LabelLastResult.Text = "Correct answer!";
             }
             else
@@ -90,9 +88,9 @@ namespace FacebookAppGUI
             try
             {
                 m_LabelError.Visible = false;
-                if (!m_PostsGame.IsGameOver)
+                if (!Facade.IsGameOver)
                 {
-                    m_CurrentQuestion = m_PostsGame.GetQuestion();
+                    m_CurrentQuestion = Facade.GetQuestion();
                 }
                 else
                 {
