@@ -23,6 +23,7 @@ namespace FacebookAppLogic
             {
                 fetchData();
             }
+            m_DataFetched = true;
         }
     }
 }

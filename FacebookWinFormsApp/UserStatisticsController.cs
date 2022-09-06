@@ -9,14 +9,14 @@ namespace FacebookAppGUI
 {
     public partial class UserStatisticsController : UserControl, ITab
     {
-        public AppManager Manager { get; }
+        public StatisticsPageFacade Facade { get; }
         private YearSummery m_SelectedYearSummery;
         private Post m_SelectedPost;
 
         public UserStatisticsController()
         {
             InitializeComponent();
-            Manager = AppManager.Instance;
+            Facade = new StatisticsPageFacade();
         }
 
         public void FetchData()
@@ -29,7 +29,7 @@ namespace FacebookAppGUI
         {
             try
             {
-                foreach (KeyValuePair<int, int> entry in Manager.Statistics.GetYearToPostCountDict())
+                foreach (KeyValuePair<int, int> entry in Facade.GetYearToPostCountDict())
                 {
                     m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series["Posts Amaunt"].Points.AddXY(entry.Key, entry.Value)));
                 }
@@ -42,7 +42,7 @@ namespace FacebookAppGUI
         {
             try
             {
-                foreach (int year in Manager.Statistics.GetAllYearsWithPosts())
+                foreach (int year in Facade.GetAllYearsWithPosts())
                 {
                     m_ComboBoxYears.Invoke(new Action(() => m_ComboBoxYears.Items.Add(year)));
                 }
@@ -72,7 +72,7 @@ namespace FacebookAppGUI
         private void fetchSelectedYeadData(int i_Year)
         {
             m_LabelWait.Invoke(new Action(() => m_LabelWait.Visible = true));
-            m_SelectedYearSummery = Manager.Statistics.GetSummeryByYear(i_Year);
+            m_SelectedYearSummery = Facade.GetSummeryByYear(i_Year);
             m_LabelWait.Invoke(new Action(() => m_LabelWait.Visible = false));
             this.Invoke(new Action(() => updateYearPanel()));
             this.Invoke(new Action(() => resetUserSelectedData()));
