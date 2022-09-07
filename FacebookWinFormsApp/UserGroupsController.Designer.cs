@@ -29,21 +29,68 @@ namespace FacebookAppGUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label m_LabelGroupDescriptionHeader;
+            System.Windows.Forms.Label m_PictureBoxGroupPictureHeader;
+            System.Windows.Forms.Label m_LabelGroupNameHader;
+            System.Windows.Forms.Label m_LabelGroupPrivacyHeader;
             this.m_LabelGroupsExplanation = new System.Windows.Forms.Label();
             this.m_ListBoxGroups = new System.Windows.Forms.ListBox();
-            this.m_PanelGroupDetails = new System.Windows.Forms.Panel();
-            this.m_PictureBoxGroupPicture = new System.Windows.Forms.PictureBox();
-            this.m_LabelGroupName = new System.Windows.Forms.Label();
-            this.m_LabelGroupNameTitle = new System.Windows.Forms.Label();
-            this.m_LabelGroupIconTitle = new System.Windows.Forms.Label();
-            this.m_LabelGroupDescription = new System.Windows.Forms.Label();
-            this.m_LabelGroupDescriptionTitle = new System.Windows.Forms.Label();
-            this.m_LabelGroupPrivacy = new System.Windows.Forms.Label();
-            this.m_LabelGroupPrivacyTitle = new System.Windows.Forms.Label();
+            this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.m_LabelError = new System.Windows.Forms.Label();
+            this.m_PanelGroupDetails = new System.Windows.Forms.Panel();
+            this.m_LabelGroupDescription = new System.Windows.Forms.TextBox();
+            this.m_LabelGroupName = new System.Windows.Forms.Label();
+            this.m_LabelGroupPrivacy = new System.Windows.Forms.Label();
+            this.m_PictureBoxGroupPicture = new System.Windows.Forms.PictureBox();
+            m_LabelGroupDescriptionHeader = new System.Windows.Forms.Label();
+            m_PictureBoxGroupPictureHeader = new System.Windows.Forms.Label();
+            m_LabelGroupNameHader = new System.Windows.Forms.Label();
+            m_LabelGroupPrivacyHeader = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).BeginInit();
             this.m_PanelGroupDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxGroupPicture)).BeginInit();
             this.SuspendLayout();
+            // 
+            // m_LabelGroupDescriptionHeader
+            // 
+            m_LabelGroupDescriptionHeader.AutoSize = true;
+            m_LabelGroupDescriptionHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            m_LabelGroupDescriptionHeader.Location = new System.Drawing.Point(18, 155);
+            m_LabelGroupDescriptionHeader.Name = "m_LabelGroupDescriptionHeader";
+            m_LabelGroupDescriptionHeader.Size = new System.Drawing.Size(77, 16);
+            m_LabelGroupDescriptionHeader.TabIndex = 0;
+            m_LabelGroupDescriptionHeader.Text = "Description:";
+            // 
+            // m_PictureBoxGroupPictureHeader
+            // 
+            m_PictureBoxGroupPictureHeader.AutoSize = true;
+            m_PictureBoxGroupPictureHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            m_PictureBoxGroupPictureHeader.Location = new System.Drawing.Point(18, 80);
+            m_PictureBoxGroupPictureHeader.Name = "m_PictureBoxGroupPictureHeader";
+            m_PictureBoxGroupPictureHeader.Size = new System.Drawing.Size(53, 16);
+            m_PictureBoxGroupPictureHeader.TabIndex = 2;
+            m_PictureBoxGroupPictureHeader.Text = "Picture:";
+            // 
+            // m_LabelGroupNameHader
+            // 
+            m_LabelGroupNameHader.AutoSize = true;
+            m_LabelGroupNameHader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            m_LabelGroupNameHader.Location = new System.Drawing.Point(18, 16);
+            m_LabelGroupNameHader.Name = "m_LabelGroupNameHader";
+            m_LabelGroupNameHader.Size = new System.Drawing.Size(46, 16);
+            m_LabelGroupNameHader.TabIndex = 4;
+            m_LabelGroupNameHader.Text = "Name:";
+            // 
+            // m_LabelGroupPrivacyHeader
+            // 
+            m_LabelGroupPrivacyHeader.AutoSize = true;
+            m_LabelGroupPrivacyHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            m_LabelGroupPrivacyHeader.Location = new System.Drawing.Point(18, 48);
+            m_LabelGroupPrivacyHeader.Name = "m_LabelGroupPrivacyHeader";
+            m_LabelGroupPrivacyHeader.Size = new System.Drawing.Size(54, 16);
+            m_LabelGroupPrivacyHeader.TabIndex = 6;
+            m_LabelGroupPrivacyHeader.Text = "Privacy:";
             // 
             // m_LabelGroupsExplanation
             // 
@@ -57,127 +104,94 @@ namespace FacebookAppGUI
             // 
             // m_ListBoxGroups
             // 
+            this.m_ListBoxGroups.DataSource = this.groupBindingSource;
+            this.m_ListBoxGroups.DisplayMember = "Name";
             this.m_ListBoxGroups.FormattingEnabled = true;
             this.m_ListBoxGroups.Location = new System.Drawing.Point(6, 29);
             this.m_ListBoxGroups.Name = "m_ListBoxGroups";
-            this.m_ListBoxGroups.Size = new System.Drawing.Size(422, 264);
+            this.m_ListBoxGroups.Size = new System.Drawing.Size(397, 264);
             this.m_ListBoxGroups.TabIndex = 6;
-            this.m_ListBoxGroups.SelectedIndexChanged += new System.EventHandler(this.m_ListBoxGroups_SelectedIndexChanged);
             // 
-            // m_PanelGroupDetails
+            // groupBindingSource
             // 
-            this.m_PanelGroupDetails.Controls.Add(this.m_PictureBoxGroupPicture);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupName);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupNameTitle);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupIconTitle);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupDescription);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupDescriptionTitle);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupPrivacy);
-            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupPrivacyTitle);
-            this.m_PanelGroupDetails.Location = new System.Drawing.Point(434, 29);
-            this.m_PanelGroupDetails.Name = "m_PanelGroupDetails";
-            this.m_PanelGroupDetails.Size = new System.Drawing.Size(334, 261);
-            this.m_PanelGroupDetails.TabIndex = 8;
-            this.m_PanelGroupDetails.Visible = false;
-            // 
-            // m_PictureBoxGroupPicture
-            // 
-            this.m_PictureBoxGroupPicture.Location = new System.Drawing.Point(108, 75);
-            this.m_PictureBoxGroupPicture.Name = "m_PictureBoxGroupPicture";
-            this.m_PictureBoxGroupPicture.Size = new System.Drawing.Size(52, 48);
-            this.m_PictureBoxGroupPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.m_PictureBoxGroupPicture.TabIndex = 11;
-            this.m_PictureBoxGroupPicture.TabStop = false;
-            // 
-            // m_LabelGroupName
-            // 
-            this.m_LabelGroupName.AutoSize = true;
-            this.m_LabelGroupName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupName.Location = new System.Drawing.Point(105, 13);
-            this.m_LabelGroupName.Name = "m_LabelGroupName";
-            this.m_LabelGroupName.Size = new System.Drawing.Size(0, 16);
-            this.m_LabelGroupName.TabIndex = 10;
-            // 
-            // m_LabelGroupNameTitle
-            // 
-            this.m_LabelGroupNameTitle.AutoSize = true;
-            this.m_LabelGroupNameTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupNameTitle.Location = new System.Drawing.Point(12, 13);
-            this.m_LabelGroupNameTitle.Name = "m_LabelGroupNameTitle";
-            this.m_LabelGroupNameTitle.Size = new System.Drawing.Size(49, 16);
-            this.m_LabelGroupNameTitle.TabIndex = 9;
-            this.m_LabelGroupNameTitle.Text = "Name:";
-            // 
-            // m_LabelGroupIconTitle
-            // 
-            this.m_LabelGroupIconTitle.AutoSize = true;
-            this.m_LabelGroupIconTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupIconTitle.Location = new System.Drawing.Point(14, 75);
-            this.m_LabelGroupIconTitle.Name = "m_LabelGroupIconTitle";
-            this.m_LabelGroupIconTitle.Size = new System.Drawing.Size(57, 16);
-            this.m_LabelGroupIconTitle.TabIndex = 8;
-            this.m_LabelGroupIconTitle.Text = "Picture:";
-            // 
-            // m_LabelGroupDescription
-            // 
-            this.m_LabelGroupDescription.AutoSize = true;
-            this.m_LabelGroupDescription.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupDescription.Location = new System.Drawing.Point(107, 147);
-            this.m_LabelGroupDescription.Name = "m_LabelGroupDescription";
-            this.m_LabelGroupDescription.Size = new System.Drawing.Size(0, 16);
-            this.m_LabelGroupDescription.TabIndex = 5;
-            // 
-            // m_LabelGroupDescriptionTitle
-            // 
-            this.m_LabelGroupDescriptionTitle.AutoSize = true;
-            this.m_LabelGroupDescriptionTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupDescriptionTitle.Location = new System.Drawing.Point(14, 147);
-            this.m_LabelGroupDescriptionTitle.Name = "m_LabelGroupDescriptionTitle";
-            this.m_LabelGroupDescriptionTitle.Size = new System.Drawing.Size(79, 16);
-            this.m_LabelGroupDescriptionTitle.TabIndex = 4;
-            this.m_LabelGroupDescriptionTitle.Text = "Description";
-            // 
-            // m_LabelGroupPrivacy
-            // 
-            this.m_LabelGroupPrivacy.AutoSize = true;
-            this.m_LabelGroupPrivacy.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupPrivacy.Location = new System.Drawing.Point(105, 44);
-            this.m_LabelGroupPrivacy.Name = "m_LabelGroupPrivacy";
-            this.m_LabelGroupPrivacy.Size = new System.Drawing.Size(0, 16);
-            this.m_LabelGroupPrivacy.TabIndex = 1;
-            // 
-            // m_LabelGroupPrivacyTitle
-            // 
-            this.m_LabelGroupPrivacyTitle.AutoSize = true;
-            this.m_LabelGroupPrivacyTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.m_LabelGroupPrivacyTitle.Location = new System.Drawing.Point(12, 44);
-            this.m_LabelGroupPrivacyTitle.Name = "m_LabelGroupPrivacyTitle";
-            this.m_LabelGroupPrivacyTitle.Size = new System.Drawing.Size(59, 16);
-            this.m_LabelGroupPrivacyTitle.TabIndex = 0;
-            this.m_LabelGroupPrivacyTitle.Text = "Privacy:";
+            this.groupBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Group);
             // 
             // m_LabelError
             // 
             this.m_LabelError.AutoSize = true;
             this.m_LabelError.ForeColor = System.Drawing.Color.Red;
-            this.m_LabelError.Location = new System.Drawing.Point(589, 10);
+            this.m_LabelError.Location = new System.Drawing.Point(529, 10);
             this.m_LabelError.Name = "m_LabelError";
             this.m_LabelError.Size = new System.Drawing.Size(177, 13);
             this.m_LabelError.TabIndex = 9;
             this.m_LabelError.Text = "Fetch failed - please try again later,,,";
             this.m_LabelError.Visible = false;
             // 
+            // m_PanelGroupDetails
+            // 
+            this.m_PanelGroupDetails.Controls.Add(this.m_PictureBoxGroupPicture);
+            this.m_PanelGroupDetails.Controls.Add(m_LabelGroupDescriptionHeader);
+            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupDescription);
+            this.m_PanelGroupDetails.Controls.Add(m_PictureBoxGroupPictureHeader);
+            this.m_PanelGroupDetails.Controls.Add(m_LabelGroupNameHader);
+            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupName);
+            this.m_PanelGroupDetails.Controls.Add(m_LabelGroupPrivacyHeader);
+            this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupPrivacy);
+            this.m_PanelGroupDetails.Location = new System.Drawing.Point(409, 29);
+            this.m_PanelGroupDetails.Name = "m_PanelGroupDetails";
+            this.m_PanelGroupDetails.Size = new System.Drawing.Size(307, 264);
+            this.m_PanelGroupDetails.TabIndex = 10;
+            // 
+            // m_LabelGroupDescription
+            // 
+            this.m_LabelGroupDescription.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "Description", true));
+            this.m_LabelGroupDescription.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.m_LabelGroupDescription.Location = new System.Drawing.Point(101, 152);
+            this.m_LabelGroupDescription.Multiline = true;
+            this.m_LabelGroupDescription.Name = "m_LabelGroupDescription";
+            this.m_LabelGroupDescription.ReadOnly = true;
+            this.m_LabelGroupDescription.Size = new System.Drawing.Size(168, 79);
+            this.m_LabelGroupDescription.TabIndex = 1;
+            // 
+            // m_LabelGroupName
+            // 
+            this.m_LabelGroupName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "Name", true));
+            this.m_LabelGroupName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.m_LabelGroupName.Location = new System.Drawing.Point(98, 16);
+            this.m_LabelGroupName.Name = "m_LabelGroupName";
+            this.m_LabelGroupName.Size = new System.Drawing.Size(100, 23);
+            this.m_LabelGroupName.TabIndex = 5;
+            // 
+            // m_LabelGroupPrivacy
+            // 
+            this.m_LabelGroupPrivacy.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "Privacy", true));
+            this.m_LabelGroupPrivacy.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.m_LabelGroupPrivacy.Location = new System.Drawing.Point(101, 47);
+            this.m_LabelGroupPrivacy.Name = "m_LabelGroupPrivacy";
+            this.m_LabelGroupPrivacy.Size = new System.Drawing.Size(100, 23);
+            this.m_LabelGroupPrivacy.TabIndex = 7;
+            // 
+            // m_PictureBoxGroupPicture
+            // 
+            this.m_PictureBoxGroupPicture.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.groupBindingSource, "ImageNormal", true));
+            this.m_PictureBoxGroupPicture.Location = new System.Drawing.Point(98, 80);
+            this.m_PictureBoxGroupPicture.Name = "m_PictureBoxGroupPicture";
+            this.m_PictureBoxGroupPicture.Size = new System.Drawing.Size(77, 57);
+            this.m_PictureBoxGroupPicture.TabIndex = 8;
+            this.m_PictureBoxGroupPicture.TabStop = false;
+            // 
             // UserGroupsController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.m_LabelError);
             this.Controls.Add(this.m_PanelGroupDetails);
+            this.Controls.Add(this.m_LabelError);
             this.Controls.Add(this.m_LabelGroupsExplanation);
             this.Controls.Add(this.m_ListBoxGroups);
             this.Name = "UserGroupsController";
             this.Size = new System.Drawing.Size(781, 337);
+            ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).EndInit();
             this.m_PanelGroupDetails.ResumeLayout(false);
             this.m_PanelGroupDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxGroupPicture)).EndInit();
@@ -190,15 +204,12 @@ namespace FacebookAppGUI
 
         private System.Windows.Forms.Label m_LabelGroupsExplanation;
         private System.Windows.Forms.ListBox m_ListBoxGroups;
-        private System.Windows.Forms.Panel m_PanelGroupDetails;
-        private System.Windows.Forms.PictureBox m_PictureBoxGroupPicture;
-        private System.Windows.Forms.Label m_LabelGroupName;
-        private System.Windows.Forms.Label m_LabelGroupNameTitle;
-        private System.Windows.Forms.Label m_LabelGroupIconTitle;
-        private System.Windows.Forms.Label m_LabelGroupDescription;
-        private System.Windows.Forms.Label m_LabelGroupDescriptionTitle;
-        private System.Windows.Forms.Label m_LabelGroupPrivacy;
-        private System.Windows.Forms.Label m_LabelGroupPrivacyTitle;
         private System.Windows.Forms.Label m_LabelError;
+        private System.Windows.Forms.Panel m_PanelGroupDetails;
+        private System.Windows.Forms.TextBox m_LabelGroupDescription;
+        private System.Windows.Forms.BindingSource groupBindingSource;
+        private System.Windows.Forms.Label m_LabelGroupName;
+        private System.Windows.Forms.Label m_LabelGroupPrivacy;
+        private System.Windows.Forms.PictureBox m_PictureBoxGroupPicture;
     }
 }
