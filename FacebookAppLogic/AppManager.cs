@@ -5,7 +5,7 @@ using System.IO;
 
 namespace FacebookAppLogic
 {
-    public class AppManager
+    public sealed class AppManager
     {
         private static AppManager s_AppManagerInstance = null;
         private static object s_LockObj = new object();
