@@ -6,12 +6,12 @@ namespace FacebookAppGUI
 {
     public partial class UserAboutController : UserControl, ITab
     {
-        public AboutPageFacade Facade { get; }
+        public AboutFacade Facade { get; }
 
         public UserAboutController()
         {
             InitializeComponent();
-            Facade = new AboutPageFacade();
+            Facade = new AboutFacade();
         }
 
         public void FetchData()

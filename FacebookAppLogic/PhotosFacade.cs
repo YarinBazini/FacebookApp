@@ -2,24 +2,24 @@
 
 namespace FacebookAppLogic
 {
-    public class PostsFacade
+    public class PhotosFacade
     {
-        private FacebookObjectCollection<Post> m_Posts;
+        private FacebookObjectCollection<Album> m_Albums;
         private readonly AppManager r_AppManager;
         private bool m_DataFetched = false;
 
-        public PostsFacade()
+        public PhotosFacade()
         {
             r_AppManager = AppManager.Instance;
         }
 
-        public FacebookObjectCollection<Post> Posts
+        public FacebookObjectCollection<Album> Albums
         {
             get
             {
                 fetchData();
 
-                return m_Posts;
+                return m_Albums;
             }
         }
 
@@ -27,7 +27,7 @@ namespace FacebookAppLogic
         {
             if (!m_DataFetched)
             {
-                m_Posts = r_AppManager.UserPosts;
+                m_Albums = r_AppManager.UserPhotoAlbums;
                 m_DataFetched = true;
             }
         }

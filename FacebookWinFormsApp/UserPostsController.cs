@@ -43,9 +43,7 @@ namespace FacebookAppGUI
                 }
             }
             catch (Exception exception)
-            {
-                //m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
-            }
+            { }
         }
 
         private void m_ListBoxPosts_SelectedIndexChanged(object sender, EventArgs e)

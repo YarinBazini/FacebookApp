@@ -8,15 +8,15 @@ namespace FacebookAppGUI
 {
     public partial class UserPhotosController : UserControl, ITab
     {
-        public PhotosPageFacade Facade { get; }
-        private readonly List<string> r_UserPhotoListOnSelectedPhotoAlbom;
+        private readonly List<string> r_UserPhotoListOnSelectedPhotoAlbum;
         private int m_CurrentPhotoShowOnPhotosTab;
+        public PhotosFacade Facade { get; }
 
         public UserPhotosController()
         {
             InitializeComponent();
-            Facade = new PhotosPageFacade();
-            r_UserPhotoListOnSelectedPhotoAlbom = new List<string>();
+            Facade = new PhotosFacade();
+            r_UserPhotoListOnSelectedPhotoAlbum = new List<string>();
         }
 
         public void FetchData()
@@ -36,9 +36,7 @@ namespace FacebookAppGUI
                 }
             }
             catch (Exception exception)
-            {
-                //m_LabelError.Invoke(new Action(() => m_LabelError.Visible = true));
-            }
+            { }
             
         }
 
@@ -51,7 +49,7 @@ namespace FacebookAppGUI
         {
             Album selectedPhotoAlbum;
 
-            r_UserPhotoListOnSelectedPhotoAlbom.Clear();
+            r_UserPhotoListOnSelectedPhotoAlbum.Clear();
             m_LabelError.Visible = false;
             if (m_ListBoxPhotos.SelectedItems.Count == 1)
             {
@@ -62,13 +60,13 @@ namespace FacebookAppGUI
                     {
                         foreach (Photo photo in selectedPhotoAlbum.Photos)
                         {
-                            r_UserPhotoListOnSelectedPhotoAlbom.Add(photo.PictureThumbURL);
+                            r_UserPhotoListOnSelectedPhotoAlbum.Add(photo.PictureThumbURL);
                         }
 
                         m_ButtonPrevPhoto.Enabled = true;
                         m_ButtonNextPhoto.Enabled = true;
                         m_CurrentPhotoShowOnPhotosTab = 0;
-                        m_PictureBoxPhoto.LoadAsync(r_UserPhotoListOnSelectedPhotoAlbom[m_CurrentPhotoShowOnPhotosTab]);
+                        m_PictureBoxPhoto.LoadAsync(r_UserPhotoListOnSelectedPhotoAlbum[m_CurrentPhotoShowOnPhotosTab]);
                     }
                     else
                     {
@@ -86,10 +84,10 @@ namespace FacebookAppGUI
 
         private void m_ButtonNextPhoto_Click_1(object sender, EventArgs e)
         {
-            if (m_CurrentPhotoShowOnPhotosTab + 1 < r_UserPhotoListOnSelectedPhotoAlbom.Count)
+            if (m_CurrentPhotoShowOnPhotosTab + 1 < r_UserPhotoListOnSelectedPhotoAlbum.Count)
             {
                 m_CurrentPhotoShowOnPhotosTab++;
-                m_PictureBoxPhoto.LoadAsync(r_UserPhotoListOnSelectedPhotoAlbom[m_CurrentPhotoShowOnPhotosTab]);
+                m_PictureBoxPhoto.LoadAsync(r_UserPhotoListOnSelectedPhotoAlbum[m_CurrentPhotoShowOnPhotosTab]);
             }
         }
 
@@ -98,7 +96,7 @@ namespace FacebookAppGUI
             if (m_CurrentPhotoShowOnPhotosTab > 0)
             {
                 m_CurrentPhotoShowOnPhotosTab--;
-                m_PictureBoxPhoto.LoadAsync(r_UserPhotoListOnSelectedPhotoAlbom[m_CurrentPhotoShowOnPhotosTab]);
+                m_PictureBoxPhoto.LoadAsync(r_UserPhotoListOnSelectedPhotoAlbum[m_CurrentPhotoShowOnPhotosTab]);
             }
         }
     }

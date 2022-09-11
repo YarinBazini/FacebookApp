@@ -2,24 +2,24 @@
 
 namespace FacebookAppLogic
 {
-    public class PostsFacade
+    public class GroupsFacade
     {
-        private FacebookObjectCollection<Post> m_Posts;
+        private FacebookObjectCollection<Group> m_Groups;
         private readonly AppManager r_AppManager;
         private bool m_DataFetched = false;
 
-        public PostsFacade()
+        public GroupsFacade()
         {
             r_AppManager = AppManager.Instance;
         }
 
-        public FacebookObjectCollection<Post> Posts
-        {
+        public FacebookObjectCollection<Group> Groups 
+        { 
             get
             {
                 fetchData();
 
-                return m_Posts;
+                return m_Groups;
             }
         }
 
@@ -27,7 +27,7 @@ namespace FacebookAppLogic
         {
             if (!m_DataFetched)
             {
-                m_Posts = r_AppManager.UserPosts;
+                m_Groups = r_AppManager.UserGroups;
                 m_DataFetched = true;
             }
         }

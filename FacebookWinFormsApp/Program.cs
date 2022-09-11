@@ -2,10 +2,9 @@
 using System.Windows.Forms;
 using FacebookWrapper;
 
-
 namespace FacebookAppGUI
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.

@@ -9,14 +9,14 @@ namespace FacebookAppGUI
 {
     public partial class UserStatisticsController : UserControl, ITab
     {
-        public StatisticsPageFacade Facade { get; }
         private YearSummery m_SelectedYearSummery;
         private Post m_SelectedPost;
+        public StatisticsFacade Facade { get; }
 
         public UserStatisticsController()
         {
             InitializeComponent();
-            Facade = new StatisticsPageFacade();
+            Facade = new StatisticsFacade();
         }
 
         public void FetchData()
@@ -48,9 +48,7 @@ namespace FacebookAppGUI
                 }
             }
             catch(Exception exception)
-            {
-
-            }
+            { }
         }
 
         private void m_ButtonShow_Click(object sender, EventArgs e)

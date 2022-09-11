@@ -1,36 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FacebookAppLogic
 {
-    public class StatisticsPageFacade : Facade
+    public class StatisticsFacade 
     {
         private StatisticsManager m_StatisticsManager;
-        public StatisticsPageFacade()
+        private readonly AppManager r_AppManager;
+        private bool m_DataFetched = false;
+
+        public StatisticsFacade()
         {
+            r_AppManager = AppManager.Instance;
         }
 
-        protected override void fetchData()
+        private void fetchData()
         {
-            m_StatisticsManager = r_AppManager.Statistics;
+            if (!m_DataFetched)
+            {
+                m_StatisticsManager = r_AppManager.Statistics;
+                m_DataFetched = true;
+            }
         }
 
         public Dictionary<int, int> GetYearToPostCountDict()
         {
-            fetchDataIfDidntFetchAlready();
+            fetchData();
+
             return m_StatisticsManager.GetYearToPostCountDict();
         }
 
         public List<int> GetAllYearsWithPosts()
         {
-            fetchDataIfDidntFetchAlready();
+            fetchData();
+
             return m_StatisticsManager.GetAllYearsWithPosts();
         }
 
         public YearSummery GetSummeryByYear(int i_Year)
         {
-            fetchDataIfDidntFetchAlready();
+            fetchData();
+
             return m_StatisticsManager.GetSummeryByYear(i_Year);
         }
     }

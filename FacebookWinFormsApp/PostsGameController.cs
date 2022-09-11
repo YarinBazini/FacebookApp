@@ -7,8 +7,8 @@ namespace FacebookAppGUI
 {
     public partial class PostsGameController : UserControl, ITab
     {
-        public PostGameFacade Facade { get; }
         private PostsGameQuestion m_CurrentQuestion;
+        public PostGameFacade Facade { get; }
 
         public PostsGameController()
         {

@@ -15,7 +15,7 @@ namespace FacebookAppLogic
         private string m_AccessToken;
         private PostsGame m_PostsGame;
         private StatisticsManager m_StatisticsManager;
-        private const string AppID = "599927405011335";
+        private const string k_AppID = "599927405011335";
 
         private AppManager()
         {}
@@ -24,11 +24,11 @@ namespace FacebookAppLogic
         { 
             get
             {
-                if(s_AppManagerInstance == null)
+                if (s_AppManagerInstance == null)
                 {
                     lock(s_LockObj)
                     {
-                        if(s_AppManagerInstance == null)
+                        if (s_AppManagerInstance == null)
                         {
                             s_AppManagerInstance = new AppManager();
                         }
@@ -37,8 +37,7 @@ namespace FacebookAppLogic
 
                 return s_AppManagerInstance;
             }
-
-         }
+        }
 
         public void Login()
         {
@@ -152,7 +151,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                if(m_StatisticsManager == null)
+                if (m_StatisticsManager == null)
                 {
                     m_StatisticsManager = new StatisticsManager(m_LoggedInUser.Posts);
                 }
@@ -181,7 +180,7 @@ namespace FacebookAppLogic
             {
              m_LoginResult = FacebookService.Login(
              //App ID    
-             AppID,
+             k_AppID,
              //requested permissions:
              "email",
              "public_profile",

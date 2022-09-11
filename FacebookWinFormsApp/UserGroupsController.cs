@@ -1,18 +1,16 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using FacebookAppLogic;
-using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
     public partial class UserGroupsController : UserControl, ITab
     {
-        public GroupsPageFacade Facade { get; }
+        public GroupsFacade Facade { get; }
 
         public UserGroupsController()
         {
             InitializeComponent();
-            Facade = new GroupsPageFacade();
+            Facade = new GroupsFacade();
         }
 
         public void FetchData()

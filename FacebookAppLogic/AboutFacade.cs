@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FacebookAppLogic
+﻿namespace FacebookAppLogic
 {
-    public class AboutPageFacade: Facade
+    public class AboutFacade
     {
-        
         private string m_FirstName;
         private string m_LastName;
         private string m_Birthday;
@@ -14,12 +9,19 @@ namespace FacebookAppLogic
         private string m_Email;
         private string m_RelationshipStatus;
         private string m_FacebookId;
+        private readonly AppManager r_AppManager;
+        private bool m_DataFetched = false;
+
+        public AboutFacade()
+        {
+            r_AppManager = AppManager.Instance;
+        }
 
         public string FirstName
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_FirstName;
             }
@@ -29,7 +31,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_LastName;
             }
@@ -39,7 +41,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_Gender;
             }
@@ -49,7 +51,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_Birthday;
             }
@@ -59,7 +61,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_Email;
             }
@@ -69,7 +71,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_RelationshipStatus;
             }
@@ -79,26 +81,25 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_FacebookId;
             }
         }
 
-        public AboutPageFacade()
+        private void fetchData() 
         {
-        }
-
-        override protected void fetchData() 
-        {
-            m_FirstName = r_AppManager.LoggedInUser.FirstName;
-            m_LastName = r_AppManager.LoggedInUser.LastName;
-            m_Gender = r_AppManager.LoggedInUser.Gender.ToString();
-            m_Birthday = r_AppManager.LoggedInUser.Birthday.ToString();
-            m_Email = r_AppManager.LoggedInUser.Email.ToString();
-            m_RelationshipStatus = r_AppManager.LoggedInUser.RelationshipStatus.ToString();
-            m_FacebookId = r_AppManager.LoggedInUser.Id;
-            m_DataFetched = true;
+            if (!m_DataFetched)
+            {
+                m_FirstName = r_AppManager.LoggedInUser.FirstName;
+                m_LastName = r_AppManager.LoggedInUser.LastName;
+                m_Gender = r_AppManager.LoggedInUser.Gender.ToString();
+                m_Birthday = r_AppManager.LoggedInUser.Birthday.ToString();
+                m_Email = r_AppManager.LoggedInUser.Email.ToString();
+                m_RelationshipStatus = r_AppManager.LoggedInUser.RelationshipStatus.ToString();
+                m_FacebookId = r_AppManager.LoggedInUser.Id;
+                m_DataFetched = true;
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ namespace FacebookAppLogic
             int range = i_List.Count -1;
             int randomIndex;
 
-            while(range > 0)
+            while (range > 0)
             {
                 randomIndex = r_Generator.Next(range);
                 swap(i_List, randomIndex, range);

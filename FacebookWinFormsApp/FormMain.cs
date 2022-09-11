@@ -35,13 +35,13 @@ namespace FacebookAppGUI
 
         private void conectControlersToUITabs()
         {
-            this.m_TabPosts.Controls.Add(Tabs[TabsFactory.TabType.PostsTab] as UserControl);
-            this.m_TabAbout.Controls.Add(Tabs[TabsFactory.TabType.AboutTab] as UserControl);
-            this.m_TabPhotos.Controls.Add(Tabs[TabsFactory.TabType.PhotosTab] as UserControl);
-            this.m_TabGroups.Controls.Add(Tabs[TabsFactory.TabType.GroupsTab] as UserControl);
-            this.m_TabLikedPages.Controls.Add(Tabs[TabsFactory.TabType.LikesPagesTab] as UserControl);
-            this.m_TabPagePostsGame.Controls.Add(Tabs[TabsFactory.TabType.PostsGameTab] as UserControl);
-            this.m_TabPageStatistics.Controls.Add(Tabs[TabsFactory.TabType.UserStatisticsTab] as UserControl);
+            m_TabPosts.Controls.Add(Tabs[TabsFactory.TabType.PostsTab] as UserControl);
+            m_TabAbout.Controls.Add(Tabs[TabsFactory.TabType.AboutTab] as UserControl);
+            m_TabPhotos.Controls.Add(Tabs[TabsFactory.TabType.PhotosTab] as UserControl);
+            m_TabGroups.Controls.Add(Tabs[TabsFactory.TabType.GroupsTab] as UserControl);
+            m_TabLikedPages.Controls.Add(Tabs[TabsFactory.TabType.LikesPagesTab] as UserControl);
+            m_TabPagePostsGame.Controls.Add(Tabs[TabsFactory.TabType.PostsGameTab] as UserControl);
+            m_TabPageStatistics.Controls.Add(Tabs[TabsFactory.TabType.UserStatisticsTab] as UserControl);
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

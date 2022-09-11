@@ -2,24 +2,24 @@
 
 namespace FacebookAppLogic
 {
-    public class PostsFacade
+    public class LikedPagesFacade
     {
-        private FacebookObjectCollection<Post> m_Posts;
+        private FacebookObjectCollection<Page> m_LikedPages;
         private readonly AppManager r_AppManager;
         private bool m_DataFetched = false;
 
-        public PostsFacade()
+        public LikedPagesFacade()
         {
             r_AppManager = AppManager.Instance;
         }
-
-        public FacebookObjectCollection<Post> Posts
+        
+        public FacebookObjectCollection<Page> LikedPages
         {
             get
             {
                 fetchData();
 
-                return m_Posts;
+                return m_LikedPages;
             }
         }
 
@@ -27,7 +27,7 @@ namespace FacebookAppLogic
         {
             if (!m_DataFetched)
             {
-                m_Posts = r_AppManager.UserPosts;
+                m_LikedPages = r_AppManager.UserLikedPages;
                 m_DataFetched = true;
             }
         }

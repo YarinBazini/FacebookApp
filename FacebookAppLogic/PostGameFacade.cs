@@ -1,27 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FacebookAppLogic
+﻿namespace FacebookAppLogic
 {
-    public class PostGameFacade : Facade
+    public class PostGameFacade
     {
         private PostsGame m_PostGame;
-        
+        private readonly AppManager r_AppManager;
+        private bool m_DataFetched = false;
+
         public PostGameFacade()
         {
+            r_AppManager = AppManager.Instance;
         }
 
-        protected override void fetchData()
+        private void fetchData()
         {
-            m_PostGame = r_AppManager.PostsGame();
+            if (!m_DataFetched)
+            {
+                m_PostGame = r_AppManager.PostsGame();
+                m_DataFetched = true;
+            }
         }
 
         public bool UserCanPlay
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_PostGame.UserCanPlay;
             }
@@ -36,7 +39,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_PostGame.CurrentScore;
             }
@@ -46,7 +49,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_PostGame.BestScore;
             }
@@ -56,7 +59,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_PostGame.QuestionCounter;
             }
@@ -66,7 +69,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_PostGame.QuestionsPerGame;
             }
@@ -76,7 +79,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                fetchDataIfDidntFetchAlready();
+                fetchData();
 
                 return m_PostGame.IsGameOver;
             }
