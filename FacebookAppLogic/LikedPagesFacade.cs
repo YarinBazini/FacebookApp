@@ -1,8 +1,10 @@
 ﻿using FacebookWrapper.ObjectModel;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace FacebookAppLogic
 {
-    public class LikedPagesFacade
+    public class LikedPagesFacade : IEnumerable<Page>
     {
         private FacebookObjectCollection<Page> m_LikedPages;
         private readonly AppManager r_AppManager;
@@ -13,13 +15,13 @@ namespace FacebookAppLogic
             r_AppManager = AppManager.Instance;
         }
         
-        public FacebookObjectCollection<Page> LikedPages
+        public int Count
         {
             get
             {
                 fetchData();
 
-                return m_LikedPages;
+                return m_LikedPages.Count;
             }
         }
 
@@ -30,6 +32,20 @@ namespace FacebookAppLogic
                 m_LikedPages = r_AppManager.UserLikedPages;
                 m_DataFetched = true;
             }
+        }
+
+        public IEnumerator<Page> GetEnumerator()
+        {
+            fetchData();
+            foreach (Page page in m_LikedPages)
+            {
+                yield return page;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

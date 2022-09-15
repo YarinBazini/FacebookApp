@@ -20,26 +20,19 @@ namespace FacebookAppGUI
             try
             {
                 m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Clear()));
+                m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.DisplayMember = "Message"));
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
-                foreach (Post post in Facade.Posts)
+                foreach (Post post in Facade)
                 {
                     if (post.Message != null)
                     {
-                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add(post.Message)));
-                    }
-                    else if (post.Caption != null)
-                    {
-                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add(post.Caption)));
-                    }
-                    else
-                    {
-                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add((string.Format("[{0}]", post.Type)))));
+                        m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add(post)));
                     }
                 }
 
                 if (m_ListBoxPosts.Items.Count == 0)
                 {
-                    m_ListBoxPosts.Items.Add("You have not published any post yet");
+                    m_ListBoxPosts.Invoke(new Action(() => m_ListBoxPosts.Items.Add("You have not published any post yet")));
                 }
             }
             catch (Exception exception)
@@ -50,7 +43,7 @@ namespace FacebookAppGUI
         {
             try
             {
-                Post selectedUsetPost = Facade.Posts[m_ListBoxPosts.SelectedIndex];
+                Post selectedUsetPost = (Post)m_ListBoxPosts.SelectedItem;
 
                 m_ListBoxPostComments.Items.Clear();
                 m_LabelError.Visible = false;

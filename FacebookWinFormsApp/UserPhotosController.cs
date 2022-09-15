@@ -25,7 +25,7 @@ namespace FacebookAppGUI
             {
                 m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Clear()));
                 m_LabelError.Invoke(new Action(() => m_LabelError.Visible = false));
-                foreach (Album album in Facade.Albums)
+                foreach (Album album in Facade)
                 {
                     m_ListBoxPhotos.Invoke(new Action(() => m_ListBoxPhotos.Items.Add(album)));
                 }

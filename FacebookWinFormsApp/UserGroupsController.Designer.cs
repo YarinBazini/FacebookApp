@@ -39,10 +39,10 @@ namespace FacebookAppGUI
             this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.m_LabelError = new System.Windows.Forms.Label();
             this.m_PanelGroupDetails = new System.Windows.Forms.Panel();
+            this.m_PictureBoxGroupPicture = new System.Windows.Forms.PictureBox();
             this.m_LabelGroupDescription = new System.Windows.Forms.TextBox();
             this.m_LabelGroupName = new System.Windows.Forms.Label();
             this.m_LabelGroupPrivacy = new System.Windows.Forms.Label();
-            this.m_PictureBoxGroupPicture = new System.Windows.Forms.PictureBox();
             m_LabelGroupDescriptionHeader = new System.Windows.Forms.Label();
             m_PictureBoxGroupPictureHeader = new System.Windows.Forms.Label();
             m_LabelGroupNameHader = new System.Windows.Forms.Label();
@@ -142,6 +142,15 @@ namespace FacebookAppGUI
             this.m_PanelGroupDetails.Size = new System.Drawing.Size(307, 264);
             this.m_PanelGroupDetails.TabIndex = 10;
             // 
+            // m_PictureBoxGroupPicture
+            // 
+            this.m_PictureBoxGroupPicture.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.groupBindingSource, "ImageNormal", true));
+            this.m_PictureBoxGroupPicture.Location = new System.Drawing.Point(98, 80);
+            this.m_PictureBoxGroupPicture.Name = "m_PictureBoxGroupPicture";
+            this.m_PictureBoxGroupPicture.Size = new System.Drawing.Size(77, 57);
+            this.m_PictureBoxGroupPicture.TabIndex = 8;
+            this.m_PictureBoxGroupPicture.TabStop = false;
+            // 
             // m_LabelGroupDescription
             // 
             this.m_LabelGroupDescription.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "Description", true));
@@ -170,15 +179,6 @@ namespace FacebookAppGUI
             this.m_LabelGroupPrivacy.Name = "m_LabelGroupPrivacy";
             this.m_LabelGroupPrivacy.Size = new System.Drawing.Size(100, 23);
             this.m_LabelGroupPrivacy.TabIndex = 7;
-            // 
-            // m_PictureBoxGroupPicture
-            // 
-            this.m_PictureBoxGroupPicture.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.groupBindingSource, "ImageNormal", true));
-            this.m_PictureBoxGroupPicture.Location = new System.Drawing.Point(98, 80);
-            this.m_PictureBoxGroupPicture.Name = "m_PictureBoxGroupPicture";
-            this.m_PictureBoxGroupPicture.Size = new System.Drawing.Size(77, 57);
-            this.m_PictureBoxGroupPicture.TabIndex = 8;
-            this.m_PictureBoxGroupPicture.TabStop = false;
             // 
             // UserGroupsController
             // 

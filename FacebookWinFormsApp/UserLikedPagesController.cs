@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using FacebookAppLogic;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
@@ -15,7 +16,10 @@ namespace FacebookAppGUI
          
         public void FetchData()
         {
-            pageBindingSource.DataSource = Facade.LikedPages;
+            if(Facade.Count > 0)
+            {
+                pageBindingSource.DataSource = Facade;
+            }
         }
     }
 }

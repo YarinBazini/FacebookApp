@@ -1,8 +1,10 @@
 ﻿using FacebookWrapper.ObjectModel;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace FacebookAppLogic
 {
-    public class PhotosFacade
+    public class PhotosFacade : IEnumerable<Album>
     {
         private FacebookObjectCollection<Album> m_Albums;
         private readonly AppManager r_AppManager;
@@ -13,16 +15,6 @@ namespace FacebookAppLogic
             r_AppManager = AppManager.Instance;
         }
 
-        public FacebookObjectCollection<Album> Albums
-        {
-            get
-            {
-                fetchData();
-
-                return m_Albums;
-            }
-        }
-
         private void fetchData()
         {
             if (!m_DataFetched)
@@ -30,6 +22,20 @@ namespace FacebookAppLogic
                 m_Albums = r_AppManager.UserPhotoAlbums;
                 m_DataFetched = true;
             }
+        }
+
+        public IEnumerator<Album> GetEnumerator()
+        {
+            fetchData();
+            foreach (Album album in m_Albums)
+            {
+                yield return album;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
