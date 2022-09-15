@@ -35,12 +35,6 @@
             </PropertyUISettings>
          </TypeUISetting>
       </GenericObjectDataSource>
-      <GenericObjectDataSource DisplayName="Events" Version="1.0">
-         <TypeInfo>FacebookWrapper.ObjectModel.Event, FbGraphApiWrapper, Version=8.0.2.2, Culture=neutral, PublicKeyToken=null</TypeInfo>
-      </GenericObjectDataSource>
-      <GenericObjectDataSource DisplayName="WallPosts" Version="1.0">
-         <TypeInfo>FacebookWrapper.ObjectModel.Post, FbGraphApiWrapper, Version=8.0.2.2, Culture=neutral, PublicKeyToken=null</TypeInfo>
-      </GenericObjectDataSource>
    </Children>
    <TypeInfo>FacebookWrapper.ObjectModel.Group, FbGraphApiWrapper, Version=8.0.2.2, Culture=neutral, PublicKeyToken=null</TypeInfo>
    <TypeUISetting>
@@ -146,7 +140,7 @@
          <PropertyUISetting Name="UpdateTime">
             <ControlSettings>
                <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
-                  <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
+                  <BindableControlInfo Name="Label" Type="System.Windows.Forms.Label" AssemblyName="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
                </ControlSetting>
             </ControlSettings>
          </PropertyUISetting>

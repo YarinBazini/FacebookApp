@@ -34,6 +34,7 @@ namespace FacebookAppGUI
             System.Windows.Forms.Label m_PictureBoxGroupPictureHeader;
             System.Windows.Forms.Label m_LabelGroupNameHader;
             System.Windows.Forms.Label m_LabelGroupPrivacyHeader;
+            System.Windows.Forms.Label updateTimeLabel;
             this.m_LabelGroupsExplanation = new System.Windows.Forms.Label();
             this.m_ListBoxGroups = new System.Windows.Forms.ListBox();
             this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -43,10 +44,12 @@ namespace FacebookAppGUI
             this.m_LabelGroupDescription = new System.Windows.Forms.TextBox();
             this.m_LabelGroupName = new System.Windows.Forms.Label();
             this.m_LabelGroupPrivacy = new System.Windows.Forms.Label();
+            this.updateTimeLabel1 = new System.Windows.Forms.Label();
             m_LabelGroupDescriptionHeader = new System.Windows.Forms.Label();
             m_PictureBoxGroupPictureHeader = new System.Windows.Forms.Label();
             m_LabelGroupNameHader = new System.Windows.Forms.Label();
             m_LabelGroupPrivacyHeader = new System.Windows.Forms.Label();
+            updateTimeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).BeginInit();
             this.m_PanelGroupDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxGroupPicture)).BeginInit();
@@ -129,6 +132,8 @@ namespace FacebookAppGUI
             // 
             // m_PanelGroupDetails
             // 
+            this.m_PanelGroupDetails.Controls.Add(updateTimeLabel);
+            this.m_PanelGroupDetails.Controls.Add(this.updateTimeLabel1);
             this.m_PanelGroupDetails.Controls.Add(this.m_PictureBoxGroupPicture);
             this.m_PanelGroupDetails.Controls.Add(m_LabelGroupDescriptionHeader);
             this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupDescription);
@@ -139,7 +144,7 @@ namespace FacebookAppGUI
             this.m_PanelGroupDetails.Controls.Add(this.m_LabelGroupPrivacy);
             this.m_PanelGroupDetails.Location = new System.Drawing.Point(409, 29);
             this.m_PanelGroupDetails.Name = "m_PanelGroupDetails";
-            this.m_PanelGroupDetails.Size = new System.Drawing.Size(307, 264);
+            this.m_PanelGroupDetails.Size = new System.Drawing.Size(307, 292);
             this.m_PanelGroupDetails.TabIndex = 10;
             // 
             // m_PictureBoxGroupPicture
@@ -180,6 +185,24 @@ namespace FacebookAppGUI
             this.m_LabelGroupPrivacy.Size = new System.Drawing.Size(100, 23);
             this.m_LabelGroupPrivacy.TabIndex = 7;
             // 
+            // updateTimeLabel
+            // 
+            updateTimeLabel.AutoSize = true;
+            updateTimeLabel.Location = new System.Drawing.Point(24, 251);
+            updateTimeLabel.Name = "updateTimeLabel";
+            updateTimeLabel.Size = new System.Drawing.Size(71, 13);
+            updateTimeLabel.TabIndex = 8;
+            updateTimeLabel.Text = "Update Time:";
+            // 
+            // updateTimeLabel1
+            // 
+            this.updateTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "UpdateTime", true));
+            this.updateTimeLabel1.Location = new System.Drawing.Point(101, 251);
+            this.updateTimeLabel1.Name = "updateTimeLabel1";
+            this.updateTimeLabel1.Size = new System.Drawing.Size(100, 23);
+            this.updateTimeLabel1.TabIndex = 9;
+            this.updateTimeLabel1.Text = "label1";
+            // 
             // UserGroupsController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,5 +234,6 @@ namespace FacebookAppGUI
         private System.Windows.Forms.Label m_LabelGroupName;
         private System.Windows.Forms.Label m_LabelGroupPrivacy;
         private System.Windows.Forms.PictureBox m_PictureBoxGroupPicture;
+        private System.Windows.Forms.Label updateTimeLabel1;
     }
 }

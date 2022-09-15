@@ -1,9 +1,12 @@
-﻿namespace FacebookAppLogic
+﻿using System.ComponentModel;
+
+namespace FacebookAppLogic
 {
     public class PostGameFacade
     {
         private PostsGame m_PostGame;
         private readonly AppManager r_AppManager;
+        private int m_BestScore;
         private bool m_DataFetched = false;
 
         public PostGameFacade()
@@ -16,8 +19,15 @@
             if (!m_DataFetched)
             {
                 m_PostGame = r_AppManager.PostsGame();
+                m_PostGame.PropertyChanged += new PropertyChangedEventHandler(updateBestScore);
+                m_BestScore = m_PostGame.BestScore;
                 m_DataFetched = true;
             }
+        }
+
+        private void updateBestScore(object sender, PropertyChangedEventArgs e)
+        {
+            BestScore = m_PostGame.BestScore;
         }
 
         public bool UserCanPlay
@@ -51,7 +61,11 @@
             {
                 fetchData();
 
-                return m_PostGame.BestScore;
+                return m_BestScore;
+            }
+            set
+            {
+                m_BestScore = value;
             }
         }
 
