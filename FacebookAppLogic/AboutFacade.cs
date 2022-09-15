@@ -1,6 +1,9 @@
-﻿namespace FacebookAppLogic
+﻿using System;
+using System.ComponentModel;
+
+namespace FacebookAppLogic
 {
-    public class AboutFacade
+    public class AboutFacade : INotifyPropertyChanged
     {
         private string m_FirstName;
         private string m_LastName;
@@ -11,10 +14,20 @@
         private string m_FacebookId;
         private readonly AppManager r_AppManager;
         private bool m_DataFetched = false;
+        private int m_BestGameScore;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public AboutFacade()
         {
             r_AppManager = AppManager.Instance;
+        }
+
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
         }
 
         public string FirstName
@@ -87,6 +100,23 @@
             }
         }
 
+        public int BestGameScore
+        {
+            get
+            {
+                fetchData();
+
+                return m_BestGameScore;
+            }
+            set
+            {
+                if (m_BestGameScore != value)
+                {
+                    m_BestGameScore = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("BestGameScore"));
+                }
+            }
+        }
         private void fetchData() 
         {
             if (!m_DataFetched)
@@ -98,8 +128,15 @@
                 m_Email = r_AppManager.LoggedInUser.Email.ToString();
                 m_RelationshipStatus = r_AppManager.LoggedInUser.RelationshipStatus.ToString();
                 m_FacebookId = r_AppManager.LoggedInUser.Id;
+                m_BestGameScore = r_AppManager.PostsGame().BestScore;
+                r_AppManager.PostsGame().PropertyChanged += new PropertyChangedEventHandler(onUpdateBestScore);
                 m_DataFetched = true;
             }
+        }
+
+        private void onUpdateBestScore(object sender, PropertyChangedEventArgs e)
+        {
+            BestGameScore = r_AppManager.PostsGame().BestScore;
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace FacebookAppLogic
 {
-    public class PostsGame
+    public class PostsGame : INotifyPropertyChanged
     {
         private readonly List<UserPost> r_Posts = new List<UserPost>();
         private int m_BestScore;
@@ -15,6 +16,7 @@ namespace FacebookAppLogic
         private readonly Random r_Generator;
         private bool m_UserCanPlay;
         private bool m_IsGameOver;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public PostsGame(FacebookObjectCollection<Post> i_Posts)
         {
@@ -57,9 +59,9 @@ namespace FacebookAppLogic
 
         public void StartNewGame()
         {
-            if (m_CurrentGameScore > m_BestScore)
+            if (m_CurrentGameScore > BestScore)
             {
-                m_BestScore = m_CurrentGameScore;
+                BestScore = m_CurrentGameScore;
             }
 
             m_CurrentGameScore = 0;
@@ -87,6 +89,22 @@ namespace FacebookAppLogic
             get
             {
                 return m_BestScore;
+            }
+            set
+            {
+                if (m_BestScore != value)
+                {
+                    m_BestScore = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("BestScore"));
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
             }
         }
 

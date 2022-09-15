@@ -43,6 +43,8 @@ namespace FacebookAppGUI
             this.m_LabelEmail = new System.Windows.Forms.Label();
             this.m_LabelGender = new System.Windows.Forms.Label();
             this.m_LabelGenderTitle = new System.Windows.Forms.Label();
+            this.m_LabelBestScoreTitle = new System.Windows.Forms.Label();
+            this.m_LabelBestScore = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // m_LabelLastName
@@ -178,11 +180,32 @@ namespace FacebookAppGUI
             this.m_LabelGenderTitle.TabIndex = 14;
             this.m_LabelGenderTitle.Text = "Gender:";
             // 
+            // m_LabelBestScoreTitle
+            // 
+            this.m_LabelBestScoreTitle.AutoSize = true;
+            this.m_LabelBestScoreTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.m_LabelBestScoreTitle.Location = new System.Drawing.Point(18, 295);
+            this.m_LabelBestScoreTitle.Name = "m_LabelBestScoreTitle";
+            this.m_LabelBestScoreTitle.Size = new System.Drawing.Size(147, 19);
+            this.m_LabelBestScoreTitle.TabIndex = 28;
+            this.m_LabelBestScoreTitle.Text = "Best Game Score:";
+            // 
+            // m_LabelBestScore
+            // 
+            this.m_LabelBestScore.AutoSize = true;
+            this.m_LabelBestScore.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.m_LabelBestScore.Location = new System.Drawing.Point(202, 295);
+            this.m_LabelBestScore.Name = "m_LabelBestScore";
+            this.m_LabelBestScore.Size = new System.Drawing.Size(0, 18);
+            this.m_LabelBestScore.TabIndex = 29;
+            // 
             // UserAboutController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.m_LabelBestScore);
+            this.Controls.Add(this.m_LabelBestScoreTitle);
             this.Controls.Add(this.m_LabelLastName);
             this.Controls.Add(this.m_LabelLastNameTitle);
             this.Controls.Add(this.m_LabelFirstName);
@@ -220,5 +243,7 @@ namespace FacebookAppGUI
         private System.Windows.Forms.Label m_LabelEmail;
         private System.Windows.Forms.Label m_LabelGender;
         private System.Windows.Forms.Label m_LabelGenderTitle;
+        private System.Windows.Forms.Label m_LabelBestScoreTitle;
+        private System.Windows.Forms.Label m_LabelBestScore;
     }
 }
