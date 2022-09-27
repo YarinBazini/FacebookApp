@@ -11,31 +11,28 @@ namespace FacebookAppGUI
     {
         private YearSummery m_SelectedYearSummery;
         private Post m_SelectedPost;
+        private Dictionary<RadioButton, Func<Post, int>> m_RadioButtons;
         public StatisticsFacade Facade { get; }
 
         public UserStatisticsController()
         {
             InitializeComponent();
             Facade = new StatisticsFacade();
+            initRadioButtonsDict();
         }
 
         public void FetchData()
         {
             new Thread(initYearsComboBox).Start();
-            new Thread(initBarChart).Start();
+            new Thread(() => setBarChart(Facade.GetGraph(m_RadioButtons[m_RadioButtonPosts]))).Start();
         }
 
-        private void initBarChart()
+        private void initRadioButtonsDict()
         {
-            try
-            {
-                foreach (KeyValuePair<int, int> entry in Facade.GetYearToPostCountDict())
-                {
-                    m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series["Posts Amaunt"].Points.AddXY(entry.Key, entry.Value)));
-                }
-            }
-            catch(Exception exception)
-            { }
+            m_RadioButtons = new Dictionary<RadioButton, Func<Post, int>>();
+            m_RadioButtons.Add(m_RadioButtonPosts, (Post post) => 1);
+            m_RadioButtons.Add(m_RadioButtonComments, (Post post) => post.Comments.Count);
+            m_RadioButtons.Add(m_RadioButtonLikes, (Post post) => post.LikedBy.Count);
         }
 
         private void initYearsComboBox()
@@ -143,6 +140,45 @@ namespace FacebookAppGUI
                 {
                     m_LabelSelectesUserPost.Invoke(new Action(() => m_LabelSelectesUserPost.Text = string.Format("[{0}]", m_SelectedPost.Type)));
                 }
+            }
+        }
+
+        private void setComponentstsForCalculateGraph()
+        {
+            m_LabelGraphCalculate.Visible = true;
+            m_RadioButtonLikes.Enabled = false;
+            m_RadioButtonPosts.Enabled = false;
+            m_RadioButtonComments.Enabled = false;
+        }
+
+        private void setBarChart(Dictionary<int, int> i_Graph)
+        {
+            try
+            {
+                m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series.Clear()));
+                m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series.Add("Graph")));
+                foreach (KeyValuePair<int, int> entry in i_Graph)
+                {
+                    m_ChartYearsToPost.Invoke(new Action(() => m_ChartYearsToPost.Series["Graph"].Points.AddXY(entry.Key, entry.Value)));
+                }
+
+                m_LabelGraphCalculate.Invoke(new Action(() => m_LabelGraphCalculate.Visible = false));
+                m_RadioButtonPosts.Invoke(new Action(() => m_RadioButtonPosts.Enabled = true));
+                m_RadioButtonLikes.Invoke(new Action(() => m_RadioButtonLikes.Enabled = true));
+                m_RadioButtonComments.Invoke(new Action(() => m_RadioButtonComments.Enabled = true));
+            }
+            catch(Exception exception)
+            { }
+        }
+
+        private void m_RadioButtonGraph_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton button = sender as RadioButton;
+
+            if (button.Checked)
+            {
+                setComponentstsForCalculateGraph();
+                new Thread(() => setBarChart(Facade.GetGraph(m_RadioButtons[button]))).Start();
             }
         }
     }

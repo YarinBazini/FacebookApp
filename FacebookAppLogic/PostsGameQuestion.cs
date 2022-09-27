@@ -5,16 +5,16 @@ namespace FacebookAppLogic
 {
     public class PostsGameQuestion
     {
-        private readonly string r_post;
+        private readonly string r_Post;
         private readonly DateTime r_RightAnswer;
         private readonly List<DateTime> r_WrongAnswers;
         private const int k_NumOfAnswers = 4;
         private readonly Random r_Generator;
 
-        public PostsGameQuestion(DateTime i_RightAnswer, string i_post)
+        public PostsGameQuestion(DateTime i_RightAnswer, string i_Post)
         {
             r_Generator = new Random();
-            r_post = i_post;
+            r_Post = i_Post;
             r_RightAnswer = i_RightAnswer;
             r_WrongAnswers = new List<DateTime>();
             initWrongAnswers(r_RightAnswer);
@@ -89,7 +89,7 @@ namespace FacebookAppLogic
         {
             get
             {
-                return r_post;
+                return r_Post;
             }
         }
     }

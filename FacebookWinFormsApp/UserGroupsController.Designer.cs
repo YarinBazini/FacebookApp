@@ -40,11 +40,11 @@ namespace FacebookAppGUI
             this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.m_LabelError = new System.Windows.Forms.Label();
             this.m_PanelGroupDetails = new System.Windows.Forms.Panel();
+            this.updateTimeLabel1 = new System.Windows.Forms.Label();
             this.m_PictureBoxGroupPicture = new System.Windows.Forms.PictureBox();
             this.m_LabelGroupDescription = new System.Windows.Forms.TextBox();
             this.m_LabelGroupName = new System.Windows.Forms.Label();
             this.m_LabelGroupPrivacy = new System.Windows.Forms.Label();
-            this.updateTimeLabel1 = new System.Windows.Forms.Label();
             m_LabelGroupDescriptionHeader = new System.Windows.Forms.Label();
             m_PictureBoxGroupPictureHeader = new System.Windows.Forms.Label();
             m_LabelGroupNameHader = new System.Windows.Forms.Label();
@@ -94,6 +94,15 @@ namespace FacebookAppGUI
             m_LabelGroupPrivacyHeader.Size = new System.Drawing.Size(54, 16);
             m_LabelGroupPrivacyHeader.TabIndex = 6;
             m_LabelGroupPrivacyHeader.Text = "Privacy:";
+            // 
+            // updateTimeLabel
+            // 
+            updateTimeLabel.AutoSize = true;
+            updateTimeLabel.Location = new System.Drawing.Point(24, 251);
+            updateTimeLabel.Name = "updateTimeLabel";
+            updateTimeLabel.Size = new System.Drawing.Size(71, 13);
+            updateTimeLabel.TabIndex = 8;
+            updateTimeLabel.Text = "Update Time:";
             // 
             // m_LabelGroupsExplanation
             // 
@@ -147,6 +156,14 @@ namespace FacebookAppGUI
             this.m_PanelGroupDetails.Size = new System.Drawing.Size(307, 292);
             this.m_PanelGroupDetails.TabIndex = 10;
             // 
+            // updateTimeLabel1
+            // 
+            this.updateTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "UpdateTime", true));
+            this.updateTimeLabel1.Location = new System.Drawing.Point(101, 251);
+            this.updateTimeLabel1.Name = "updateTimeLabel1";
+            this.updateTimeLabel1.Size = new System.Drawing.Size(100, 23);
+            this.updateTimeLabel1.TabIndex = 9;
+            // 
             // m_PictureBoxGroupPicture
             // 
             this.m_PictureBoxGroupPicture.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.groupBindingSource, "ImageNormal", true));
@@ -184,24 +201,6 @@ namespace FacebookAppGUI
             this.m_LabelGroupPrivacy.Name = "m_LabelGroupPrivacy";
             this.m_LabelGroupPrivacy.Size = new System.Drawing.Size(100, 23);
             this.m_LabelGroupPrivacy.TabIndex = 7;
-            // 
-            // updateTimeLabel
-            // 
-            updateTimeLabel.AutoSize = true;
-            updateTimeLabel.Location = new System.Drawing.Point(24, 251);
-            updateTimeLabel.Name = "updateTimeLabel";
-            updateTimeLabel.Size = new System.Drawing.Size(71, 13);
-            updateTimeLabel.TabIndex = 8;
-            updateTimeLabel.Text = "Update Time:";
-            // 
-            // updateTimeLabel1
-            // 
-            this.updateTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.groupBindingSource, "UpdateTime", true));
-            this.updateTimeLabel1.Location = new System.Drawing.Point(101, 251);
-            this.updateTimeLabel1.Name = "updateTimeLabel1";
-            this.updateTimeLabel1.Size = new System.Drawing.Size(100, 23);
-            this.updateTimeLabel1.TabIndex = 9;
-            this.updateTimeLabel1.Text = "label1";
             // 
             // UserGroupsController
             // 

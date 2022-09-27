@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace FacebookAppLogic
 {
@@ -108,6 +107,7 @@ namespace FacebookAppLogic
 
                 return m_BestGameScore;
             }
+
             set
             {
                 if (m_BestGameScore != value)
@@ -117,6 +117,7 @@ namespace FacebookAppLogic
                 }
             }
         }
+
         private void fetchData() 
         {
             if (!m_DataFetched)

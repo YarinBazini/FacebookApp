@@ -102,7 +102,7 @@ namespace FacebookAppGUI
 
                 foreach (KeyValuePair< TabsFactory.TabType, ITab> entry in Tabs)
                 {
-                    if(entry.Key != TabsFactory.TabType.UserStatisticsTab && entry.Key != TabsFactory.TabType.PostsGameTab)
+                    if (entry.Key != TabsFactory.TabType.UserStatisticsTab && entry.Key != TabsFactory.TabType.PostsGameTab)
                     {
                         current =  new Thread(entry.Value.FetchData);
                         fetchThreads.Add(current);

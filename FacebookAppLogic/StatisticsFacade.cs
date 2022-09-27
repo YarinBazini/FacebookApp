@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FacebookWrapper.ObjectModel;
+using System;
+using System.Collections.Generic;
 
 namespace FacebookAppLogic
 {
@@ -41,6 +43,13 @@ namespace FacebookAppLogic
             fetchData();
 
             return m_StatisticsManager.GetSummeryByYear(i_Year);
+        }
+
+        public Dictionary<int, int> GetGraph(Func<Post, int> i_Starategy)
+        {
+            fetchData();
+
+            return m_StatisticsManager.GetGraph(i_Starategy);
         }
     }
 }

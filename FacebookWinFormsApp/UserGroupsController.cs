@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using FacebookAppLogic;
-using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
@@ -16,7 +15,7 @@ namespace FacebookAppGUI
 
         public void FetchData()
         {
-            if(Facade.Count > 0)
+            if (Facade.Count > 0)
             {
                 groupBindingSource.DataSource = Facade;
             }

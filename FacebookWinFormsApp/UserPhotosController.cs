@@ -37,7 +37,6 @@ namespace FacebookAppGUI
             }
             catch (Exception exception)
             { }
-            
         }
 
         private void m_ListBoxPhotos_SelectedIndexChanged(object sender, EventArgs e)

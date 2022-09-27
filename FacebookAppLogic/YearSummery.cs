@@ -14,7 +14,7 @@ namespace FacebookAppLogic
         private readonly Post r_WorstCommentedPost;
         private readonly Post r_TopLikedPost;
         private readonly Post r_WorstLikedPost;
-        private readonly Random r_random = new Random();
+        private readonly Random r_Random = new Random();
 
         public YearSummery(List<Post> i_Posts, int i_Year)
         {
@@ -129,7 +129,7 @@ namespace FacebookAppLogic
             }
             catch (Exception exception)
             {
-                likesCount = r_random.Next(0, 100);
+                likesCount = r_Random.Next(0, 100);
             }
 
             return likesCount;
@@ -145,7 +145,7 @@ namespace FacebookAppLogic
             }
             catch (Exception exception)
             {
-                commentsCount = r_random.Next(0, 100);
+                commentsCount = r_Random.Next(0, 100);
             }
 
             return commentsCount;

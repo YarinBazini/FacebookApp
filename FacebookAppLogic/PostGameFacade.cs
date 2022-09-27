@@ -2,12 +2,13 @@
 
 namespace FacebookAppLogic
 {
-    public class PostGameFacade
+    public class PostGameFacade : INotifyPropertyChanged
     {
         private PostsGame m_PostGame;
         private readonly AppManager r_AppManager;
         private int m_BestScore;
         private bool m_DataFetched = false;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public PostGameFacade()
         {
@@ -63,9 +64,11 @@ namespace FacebookAppLogic
 
                 return m_BestScore;
             }
+
             set
             {
                 m_BestScore = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("BestGameScore"));
             }
         }
 
@@ -107,6 +110,14 @@ namespace FacebookAppLogic
         public void IncreaseScore()
         {
             m_PostGame.IncreaseScore();
+        }
+
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
         }
     }
 }

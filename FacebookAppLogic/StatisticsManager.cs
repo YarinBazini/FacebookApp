@@ -8,7 +8,8 @@ namespace FacebookAppLogic
     {
         private readonly Dictionary<int, List<Post>> r_PostToYearDict = new Dictionary<int, List<Post>>();
         private readonly Dictionary<int, YearSummery> r_YearToSummery = new Dictionary<int, YearSummery>();
-
+        private readonly Random r_Random = new Random();
+        
         public StatisticsManager(FacebookObjectCollection<Post> i_Posts)
         {
             try
@@ -52,6 +53,32 @@ namespace FacebookAppLogic
             return yearSummery;
         }
 
+        public Dictionary<int, int> GetGraph(Func<Post, int> i_Starategy)
+        {
+            Dictionary<int, int> yearToPostCount = new Dictionary<int, int>();
+            int tempCount = 0;
+
+            foreach (KeyValuePair<int, List<Post>> entry in r_PostToYearDict)
+            {
+                foreach(Post post in entry.Value)
+                {
+                    try
+                    {
+                        tempCount += i_Starategy(post);
+                    }
+                    catch(Exception e)
+                    {
+                        tempCount += generateNumber();
+                    }
+                }
+
+                yearToPostCount[entry.Key] = tempCount;
+                tempCount = 0;
+            }
+
+            return yearToPostCount;
+        }
+
         public List<int> GetAllYearsWithPosts()
         {
             return new List<int>(r_PostToYearDict.Keys);
@@ -67,6 +94,11 @@ namespace FacebookAppLogic
             }
 
             return yearToPostCount;
+        }
+
+        private int generateNumber()
+        {
+            return r_Random.Next(0, 20);
         }
     }
 }

@@ -29,10 +29,12 @@ namespace FacebookAppGUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.m_PanelStatistics = new System.Windows.Forms.Panel();
+            this.m_RadioButtonLikes = new System.Windows.Forms.RadioButton();
+            this.m_RadioButtonPosts = new System.Windows.Forms.RadioButton();
             this.m_LabelError = new System.Windows.Forms.Label();
             this.m_LabelSelectesUserPost = new System.Windows.Forms.Label();
             this.m_LabelWait = new System.Windows.Forms.Label();
@@ -49,6 +51,8 @@ namespace FacebookAppGUI
             this.m_LabelExplanationStatistics = new System.Windows.Forms.Label();
             this.m_ComboBoxYears = new System.Windows.Forms.ComboBox();
             this.m_ButtonShow = new System.Windows.Forms.Button();
+            this.m_LabelGraphCalculate = new System.Windows.Forms.Label();
+            this.m_RadioButtonComments = new System.Windows.Forms.RadioButton();
             this.m_PanelStatistics.SuspendLayout();
             this.m_PanelYearSummery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_ChartYearsToPost)).BeginInit();
@@ -56,6 +60,10 @@ namespace FacebookAppGUI
             // 
             // m_PanelStatistics
             // 
+            this.m_PanelStatistics.Controls.Add(this.m_RadioButtonComments);
+            this.m_PanelStatistics.Controls.Add(this.m_LabelGraphCalculate);
+            this.m_PanelStatistics.Controls.Add(this.m_RadioButtonLikes);
+            this.m_PanelStatistics.Controls.Add(this.m_RadioButtonPosts);
             this.m_PanelStatistics.Controls.Add(this.m_LabelError);
             this.m_PanelStatistics.Controls.Add(this.m_LabelSelectesUserPost);
             this.m_PanelStatistics.Controls.Add(this.m_LabelWait);
@@ -70,6 +78,30 @@ namespace FacebookAppGUI
             this.m_PanelStatistics.TabIndex = 13;
             this.m_PanelStatistics.Visible = false;
             // 
+            // m_RadioButtonLikes
+            // 
+            this.m_RadioButtonLikes.AutoSize = true;
+            this.m_RadioButtonLikes.Location = new System.Drawing.Point(79, 73);
+            this.m_RadioButtonLikes.Name = "m_RadioButtonLikes";
+            this.m_RadioButtonLikes.Size = new System.Drawing.Size(65, 17);
+            this.m_RadioButtonLikes.TabIndex = 22;
+            this.m_RadioButtonLikes.TabStop = true;
+            this.m_RadioButtonLikes.Text = "By Likes";
+            this.m_RadioButtonLikes.UseVisualStyleBackColor = true;
+            this.m_RadioButtonLikes.CheckedChanged += new System.EventHandler(this.m_RadioButtonGraph_CheckedChanged);
+            // 
+            // m_RadioButtonPosts
+            // 
+            this.m_RadioButtonPosts.AutoSize = true;
+            this.m_RadioButtonPosts.Location = new System.Drawing.Point(7, 73);
+            this.m_RadioButtonPosts.Name = "m_RadioButtonPosts";
+            this.m_RadioButtonPosts.Size = new System.Drawing.Size(66, 17);
+            this.m_RadioButtonPosts.TabIndex = 21;
+            this.m_RadioButtonPosts.TabStop = true;
+            this.m_RadioButtonPosts.Text = "By Posts";
+            this.m_RadioButtonPosts.UseVisualStyleBackColor = true;
+            this.m_RadioButtonPosts.CheckedChanged += new System.EventHandler(this.m_RadioButtonGraph_CheckedChanged);
+            // 
             // m_LabelError
             // 
             this.m_LabelError.AutoSize = true;
@@ -81,10 +113,10 @@ namespace FacebookAppGUI
             this.m_LabelError.Text = "Error - pleas try again later.";
             this.m_LabelError.Visible = false;
             // 
-            // m_LabelSelectesUSerPost
+            // m_LabelSelectesUserPost
             // 
             this.m_LabelSelectesUserPost.Location = new System.Drawing.Point(530, 137);
-            this.m_LabelSelectesUserPost.Name = "m_LabelSelectesUSerPost";
+            this.m_LabelSelectesUserPost.Name = "m_LabelSelectesUserPost";
             this.m_LabelSelectesUserPost.Size = new System.Drawing.Size(159, 125);
             this.m_LabelSelectesUserPost.TabIndex = 19;
             // 
@@ -200,16 +232,16 @@ namespace FacebookAppGUI
             // 
             // m_ChartYearsToPost
             // 
-            chartArea1.Name = "ChartArea1";
-            this.m_ChartYearsToPost.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.m_ChartYearsToPost.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.m_ChartYearsToPost.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.m_ChartYearsToPost.Legends.Add(legend2);
             this.m_ChartYearsToPost.Location = new System.Drawing.Point(3, 96);
             this.m_ChartYearsToPost.Name = "m_ChartYearsToPost";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Posts Amaunt";
-            this.m_ChartYearsToPost.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Posts Amaunt";
+            this.m_ChartYearsToPost.Series.Add(series2);
             this.m_ChartYearsToPost.Size = new System.Drawing.Size(273, 166);
             this.m_ChartYearsToPost.TabIndex = 13;
             this.m_ChartYearsToPost.Text = "chart1";
@@ -256,6 +288,29 @@ namespace FacebookAppGUI
             this.m_ButtonShow.UseVisualStyleBackColor = false;
             this.m_ButtonShow.Click += new System.EventHandler(this.m_ButtonShow_Click);
             // 
+            // m_LabelGraphCalculate
+            // 
+            this.m_LabelGraphCalculate.AutoSize = true;
+            this.m_LabelGraphCalculate.ForeColor = System.Drawing.Color.Red;
+            this.m_LabelGraphCalculate.Location = new System.Drawing.Point(250, 77);
+            this.m_LabelGraphCalculate.Name = "m_LabelGraphCalculate";
+            this.m_LabelGraphCalculate.Size = new System.Drawing.Size(60, 13);
+            this.m_LabelGraphCalculate.TabIndex = 23;
+            this.m_LabelGraphCalculate.Text = "Calculate...";
+            this.m_LabelGraphCalculate.Visible = false;
+            // 
+            // m_RadioButtonComments
+            // 
+            this.m_RadioButtonComments.AutoSize = true;
+            this.m_RadioButtonComments.Location = new System.Drawing.Point(150, 73);
+            this.m_RadioButtonComments.Name = "m_RadioButtonComments";
+            this.m_RadioButtonComments.Size = new System.Drawing.Size(89, 17);
+            this.m_RadioButtonComments.TabIndex = 24;
+            this.m_RadioButtonComments.TabStop = true;
+            this.m_RadioButtonComments.Text = "By Comments";
+            this.m_RadioButtonComments.UseVisualStyleBackColor = true;
+            this.m_RadioButtonComments.CheckedChanged += new System.EventHandler(this.m_RadioButtonGraph_CheckedChanged);
+            // 
             // UserStatisticsController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,5 +348,9 @@ namespace FacebookAppGUI
         private System.Windows.Forms.Label m_LabelWait;
         private System.Windows.Forms.Label m_LabelSelectesUserPost;
         private System.Windows.Forms.Label m_LabelError;
+        private System.Windows.Forms.RadioButton m_RadioButtonPosts;
+        private System.Windows.Forms.RadioButton m_RadioButtonLikes;
+        private System.Windows.Forms.Label m_LabelGraphCalculate;
+        private System.Windows.Forms.RadioButton m_RadioButtonComments;
     }
 }
