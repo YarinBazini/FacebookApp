@@ -60,7 +60,7 @@ namespace FacebookAppLogic
 
             foreach (KeyValuePair<int, List<Post>> entry in r_PostToYearDict)
             {
-                foreach(Post post in entry.Value)
+                foreach (Post post in entry.Value)
                 {
                     try
                     {

@@ -107,7 +107,6 @@ namespace FacebookAppLogic
 
                 return m_BestGameScore;
             }
-
             set
             {
                 if (m_BestGameScore != value)

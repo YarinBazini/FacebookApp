@@ -25,7 +25,7 @@ namespace FacebookAppGUI
             }
             else
             { 
-                this.Invoke(new Action(()=> setAllControls()));
+                Invoke(new Action(()=> setAllControls()));
             }
         }
 

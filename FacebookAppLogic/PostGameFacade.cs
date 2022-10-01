@@ -64,7 +64,6 @@ namespace FacebookAppLogic
 
                 return m_BestScore;
             }
-
             set
             {
                 m_BestScore = value;

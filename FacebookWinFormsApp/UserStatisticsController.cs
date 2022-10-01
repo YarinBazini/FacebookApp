@@ -69,8 +69,8 @@ namespace FacebookAppGUI
             m_LabelWait.Invoke(new Action(() => m_LabelWait.Visible = true));
             m_SelectedYearSummery = Facade.GetSummeryByYear(i_Year);
             m_LabelWait.Invoke(new Action(() => m_LabelWait.Visible = false));
-            this.Invoke(new Action(() => updateYearPanel()));
-            this.Invoke(new Action(() => resetUserSelectedData()));
+            Invoke(new Action(() => updateYearPanel()));
+            Invoke(new Action(() => resetUserSelectedData()));
         }
 
         private void resetUserSelectedData()

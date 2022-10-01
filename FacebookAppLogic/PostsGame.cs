@@ -90,7 +90,6 @@ namespace FacebookAppLogic
             {
                 return m_BestScore;
             }
-
             set
             {
                 if (m_BestScore != value)

@@ -110,7 +110,7 @@ namespace FacebookAppGUI
                     }
                 }
 
-                foreach(Thread thread in fetchThreads)
+                foreach (Thread thread in fetchThreads)
                 {
                     thread.Join();
                 }
